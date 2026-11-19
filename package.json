@@ -1,0 +1,13 @@
+{
+  "name": "portd-app-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Programs for PortD 1.0, the portable desktop in one HTML file",
+  "scripts": {
+    "build": "node build/build-all.js",
+    "test": "node build/test-all.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}
