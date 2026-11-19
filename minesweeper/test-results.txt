@@ -1,0 +1,76 @@
+Minesweeper tests
+  package  minesweeper-1.0.0.portdapp
+  portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing the ported package
+  ok    PortD 1.0 accepts the format 3 package and shows its details
+  ok    …with the 💣 icon
+  ok    installed, with a desktop shortcut
+
+A beginner game, won with the mouse
+  ok    it starts a Beginner game (9×9, 10 mines), titled for the level
+  ok    the board is focused for the keyboard
+  ok    the colours follow the system (light here), as before
+  ok    the first click is always safe and opens an area
+  ok    …and starts the clock
+  ok    the first click and its neighbours hold no mine
+  ok    right-click puts a flag, and the mine counter goes down
+  ok    left-clicking a flag does nothing
+  ok    right-click again makes it a question mark
+  ok    …and again clears it
+  ok    clicking a number whose flags are all placed reveals its neighbours
+  ok    revealing every safe square wins
+  ok    …the mines are flagged and the counter shows 000
+  ok    the best time for Beginner is saved in best.json, with the date
+  ok    a new record is announced through PortD
+
+Losing
+  ok    the face starts a new game
+  ok    clicking a mine loses: the face, the red square, all mines shown
+  ok    …and a wrong flag is crossed out
+  ok    the message says how to try again
+  ok    a lost game does not change the best time
+
+Keyboard (added in the port)
+  ok    F2 starts a new game
+  ok    arrow keys move the cursor
+  ok    Space reveals the square under the cursor, safely on the first move
+  ok    F flags the square under the cursor
+  ok    each square says what it is to a screen reader
+  ok    a whole game can be won from the keyboard
+
+Touch: long-press and Flag mode
+  ok    a tap reveals
+  ok    a long press flags instead
+  ok    in Flag mode a tap flags
+
+Levels, Custom, and the board scaling
+  ok    Expert is 30×16 with 99 mines, titled for the level
+  ok    the board scales to fit the window
+  ok    the level is saved in settings.json
+  ok    Custom… opens its dialog with the last custom size, focused on Width
+  ok    Start makes the custom field, keeping mines below the number of squares
+  ok    Esc cancels the custom dialog
+
+Best times, Reset with a second click
+  ok    Best times lists each level, with the Beginner record and its date
+  ok    the first click on Reset only asks
+  ok    the second click resets
+  ok    Esc closes it, and focus goes back
+  ok    F1 shows How to play, which mentions the keyboard
+
+Theme, and reloading
+  ok    the theme button goes from following the system to light
+  ok    …then dark
+  ok    after reloading PortD the level and the theme are kept
+
+No errors
+  ok    no console errors in PortD or in Minesweeper
+
+Outside PortD: the page opened straight from its folder
+  ok    it plays: a first click opens an area
+  ok    settings are kept in localStorage (0.x saved nothing outside PortD)
+  ok    no console errors outside PortD
+
+50 checks: 50 passed, 0 failed

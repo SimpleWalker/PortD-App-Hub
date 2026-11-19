@@ -1,0 +1,12 @@
+{
+  "id": "minesweeper",
+  "name": "Minesweeper",
+  "version": "1.0.0",
+  "description": "Classic mine-clearing puzzle: three levels plus custom, best times",
+  "icon": "emoji:💣",
+  "entry": "index.html",
+  "width": 520,
+  "height": 500,
+  "singleInstance": false,
+  "fileTypes": []
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-app="minesweeper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minesweeper</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <select id="level" title="Difficulty" aria-label="Difficulty">
+      <option value="beginner">Beginner (9×9, 10)</option>
+      <option value="intermediate">Intermediate (16×16, 40)</option>
+      <option value="expert">Expert (30×16, 99)</option>
+      <option value="custom">Custom…</option>
+    </select>
+    <button id="flagMode" aria-pressed="false" title="Tap to place flags instead of revealing (for touch screens)">🚩 Flag mode</button>
+    <span class="spacer"></span>
+    <button id="bestBtn">Best times</button>
+    <button id="themeBtn" class="icon" aria-label="Theme"></button>
+    <button id="helpBtn" class="icon" title="How to play (F1)" aria-label="How to play">?</button>
+  </div>
+  <div class="status">
+    <div class="lcd" id="mines" title="Mines left" aria-label="Mines left">010</div>
+    <button id="face" title="New game (F2)" aria-label="New game">🙂</button>
+    <div class="lcd" id="time" title="Seconds" aria-label="Seconds">000</div>
+  </div>
+  <div id="wrap"><div id="board" role="grid" tabindex="0" aria-label="Minefield. Arrow keys move, Space reveals, F flags."></div></div>
+</div>
+<div id="msg" role="status" aria-live="polite"></div>
+
+<div class="dlg" id="customDlg" role="dialog" aria-modal="true" aria-labelledby="customTitle"><div>
+  <h3 id="customTitle">Custom field</h3>
+  <label>Width (5–40) <input id="cw" type="number" min="5" max="40" value="20"></label>
+  <label>Height (5–30) <input id="ch" type="number" min="5" max="30" value="12"></label>
+  <label>Mines <input id="cm" type="number" min="1" value="35"></label>
+  <div class="row"><button id="cCancel">Cancel</button><button class="pri" id="cOk">Start</button></div>
+</div></div>
+
+<div class="dlg" id="bestDlg" role="dialog" aria-modal="true" aria-labelledby="bestTitle"><div>
+  <h3 id="bestTitle">Best times</h3>
+  <table id="bestTbl"></table>
+  <div class="row"><button id="bestReset">Reset</button><button class="pri" id="bestClose">Close</button></div>
+</div></div>
+
+<div class="dlg" id="helpDlg" role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div style="max-width:360px">
+  <h3 id="helpTitle">How to play</h3>
+  <p>Reveal every square that isn't a mine. Numbers show how many mines touch that square.</p>
+  <p><b>Left-click</b> reveal · <b>Right-click</b> flag / question mark · <b>Click a number</b> whose flags are all placed to reveal its neighbours.<br>
+  Touch: <b>long-press</b> to flag, or switch on Flag mode.<br><b>F2</b> or the face starts a new game. Your first click is always safe.</p>
+  <p><b>Keyboard:</b> arrow keys move, <b>Space</b> or <b>Enter</b> reveals (on a number: its neighbours), <b>F</b> flags.</p>
+  <div class="row"><button class="pri" id="helpClose">Close</button></div>
+</div></div>
+
+<script src="js/host.js"></script>
+<script src="js/minesweeper.js"></script>
+</body>
+</html>
