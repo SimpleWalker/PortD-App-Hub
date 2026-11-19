@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-app="sudoku">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sudoku</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <select id="diff" title="Difficulty" aria-label="Difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+      <option value="expert">Expert</option>
+    </select>
+    <button id="newBtn">New game</button>
+    <span class="spacer"></span>
+    <span id="mistakes" title="Mistakes"></span>
+    <span id="time" aria-label="Time">00:00</span>
+    <button id="pauseBtn" title="Pause (Space)" aria-label="Pause">⏸</button>
+    <button id="themeBtn" class="icon" aria-label="Theme"></button>
+    <button id="menuBtn" title="Stats and help (F1)" aria-label="Stats and help">⋯</button>
+  </div>
+  <div id="wrap"><div id="gridBox"><div id="grid" role="grid" tabindex="0" aria-label="Sudoku grid. Arrow keys move, 1 to 9 enter, Delete erases, N notes."></div><div id="paused">Paused – click to continue</div></div></div>
+  <div class="tools">
+    <button id="undoBtn" title="Undo (Ctrl+Z)">↶ Undo</button>
+    <button id="eraseBtn" title="Erase (Delete)">⌫ Erase</button>
+    <button id="notesBtn" title="Pencil notes (N)" aria-pressed="false">✎ Notes</button>
+    <button id="hintBtn" title="Fill one cell (H)">💡 Hint</button>
+    <button id="checkBtn" title="Highlight mistakes as you go" aria-pressed="true">✓ Auto-check</button>
+  </div>
+  <div class="pad" id="pad" aria-label="Numbers"></div>
+</div>
+<div id="msg" role="status" aria-live="polite"></div>
+
+<div class="dlg" id="infoDlg" role="dialog" aria-modal="true" aria-labelledby="statTitle"><div>
+  <h3 id="statTitle">Statistics</h3>
+  <table id="statTbl"></table>
+  <h3 style="margin-top:14px">How to play</h3>
+  <p style="margin:0">Fill the grid so every row, column and 3×3 box contains 1–9 once.<br>
+  Click a cell, then a number. <b>Keyboard:</b> 1–9 enter, arrows move, Delete erases, <b>N</b> toggles notes, <b>H</b> gives a hint, Ctrl+Z undoes, Space pauses.<br>
+  In notes mode, numbers are pencilled in; placing a number clears it from the notes of related cells.</p>
+  <div class="row"><button id="statReset">Reset stats</button><button class="pri" id="infoClose">Close</button></div>
+</div></div>
+
+<script src="js/host.js"></script>
+<script src="js/sudoku.js"></script>
+</body>
+</html>
