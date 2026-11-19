@@ -13,7 +13,7 @@ Version 1.0.0 · for PortD 1.0 · file: `minesweeper-1.0.0.portdapp`
 
 If the `.portdapp` file is already on your PortD drive, double-click it to get the same Install screen. You can also drop it onto the PortD desktop and choose **Install…**.
 
-After installing you get a **Minesweeper** icon on the desktop, and the game is listed in the PortD menu. The old 0.x package doesn't install in PortD 1.0 (PortD says it *"was made for the PortD prototype"*), so use this one.
+After installing you get a **Minesweeper** icon on the desktop, and the game is listed in the PortD menu.
 
 ## How to play
 
@@ -43,7 +43,7 @@ The board grows and shrinks to fit the window: make the window bigger for larger
 
 ## Light and dark
 
-The game follows your system's light or dark setting. The half-circle button lets you choose instead: following the system, always light, or always dark (the original 0.x colours).
+The game follows your system's light or dark setting. The half-circle button lets you choose instead: following the system, always light, or always dark.
 
 ## Keyboard shortcuts
 
@@ -66,7 +66,7 @@ Ctrl+F6 still moves between the PortD desktop, the taskbar and this window.
 - `settings.json`: the level, the last custom size and your theme.
 - `best.json`: your best times.
 
-Your PortD backup (**Settings > Data > Download backup**) includes this folder. Uninstalling keeps it, so reinstalling brings your records back. The file names are the same as in 0.x.
+Your PortD backup (**Settings > Data > Download backup**) includes this folder. Uninstalling keeps it, so reinstalling brings your records back.
 
 ## Updating and uninstalling
 
@@ -75,18 +75,17 @@ Your PortD backup (**Settings > Data > Download backup**) includes this folder. 
 
 ## Outside PortD
 
-You can also open `src/index.html` straight in Edge or Chrome to play. Your level, theme and records are then kept in the browser (0.x saved nothing outside PortD).
+You can also open `src/index.html` straight in Edge or Chrome to play. Your level, theme and records are then kept in the browser.
 
 ## Known limits
 
 - There's no pause: the clock runs until you win or lose.
 - A game in progress isn't saved. Closing the window ends it.
-- Records from the 0.x prototype can't be carried over, because PortD 1.0 doesn't open 0.x data.
 
 ## Changelog
 
-**1.0.0** (November 2026): the live 0.x game, ported to PortD 1.0 (package format 3). The version number is unchanged.
-- The game rules and every 0.x feature are the same.
-- Now a folder of files (page, stylesheet, scripts) instead of a single file.
-- Added in the port: playing from the keyboard; light colours beside the original dark ones, following the system; screen reader labels for every square; dialogs that keep the keyboard inside them and close with Esc; Reset asks for a second click; settings and records kept outside PortD.
-- PortD's notice now reads *"Minesweeper: new beginner record, 12s"* instead of naming the game twice.
+**1.0.0** (November 2026): first release for PortD 1.0 (package format 3).
+- Three levels and a custom size, best times, and playing from the keyboard.
+- Light and dark colours following the system, with a theme button.
+- Screen reader labels for every square; dialogs that keep the keyboard inside them and close with Esc; Reset asks for a second click.
+- Settings and records are also kept when the game runs outside PortD.

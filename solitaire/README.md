@@ -13,7 +13,7 @@ Version 1.0.0 · for PortD 1.0 · file: `solitaire-1.0.0.portdapp`
 
 If the `.portdapp` file is already on your PortD drive, double-click it to get the same Install screen. You can also drop it onto the PortD desktop and choose **Install…**.
 
-After installing you get a **Solitaire** icon on the desktop, and the game is listed in the PortD menu. The old 0.x package doesn't install in PortD 1.0, so use this one.
+After installing you get a **Solitaire** icon on the desktop, and the game is listed in the PortD menu.
 
 ## How to play
 
@@ -85,19 +85,17 @@ Your PortD backup (**Settings > Data > Download backup**) includes this folder. 
 
 ## Outside PortD
 
-You can also open `src/index.html` straight in Edge or Chrome. Your game and statistics are then kept in the browser (0.x saved nothing outside PortD).
+You can also open `src/index.html` straight in Edge or Chrome. Your game and statistics are then kept in the browser.
 
 ## Known limits
 
 - Undo history lasts while the window is open. A resumed game starts with an empty history.
 - Not every deal can be won.
-- Games and statistics from the 0.x prototype can't be carried over, because PortD 1.0 doesn't open 0.x data.
 
 ## Changelog
 
-**1.0.0** (November 2026): the live 0.x game, ported to PortD 1.0 (package format 3). The version number is unchanged.
-- The rules, scoring, statistics and every 0.x feature are the same. The saved files have the same names and contents (`settings.json` also holds the theme).
-- Now a folder of files (page, stylesheet, scripts) instead of a single file.
-- Added in the port: playing from the keyboard with screen reader announcements; a dark felt following the system, with a theme button; Reset stats asks for a second click; F1 and Esc for the statistics box; no win animation when reduced motion is asked for; saving outside PortD.
-- Space turns the stock unless a button has the keyboard, so Space can press that button as usual.
-- PortD's notice now reads *"Solitaire: won in 3:12 with 1234 points"* instead of naming the game twice.
+**1.0.0** (November 2026): first release for PortD 1.0 (package format 3).
+- Klondike with Draw 1 or Draw 3, Windows standard scoring, undo, auto-finish and statistics.
+- Playing from the keyboard with screen reader announcements.
+- A dark felt following the system, with a theme button.
+- Reset stats asks for a second click; no win animation when reduced motion is asked for; your game is also kept when it runs outside PortD.

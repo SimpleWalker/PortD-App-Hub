@@ -96,4 +96,4 @@ You can also open `src/index.html` straight in Edge or Chrome. **Open…** uses 
 
 ## Changelog
 
-**1.0.0** (November 2026): first release as an installable PortD 1.0 program (package format 3). Built from the feature list of the 0.5.0 prototype's built-in Markdown Editor; the prototype's source was not available.
+**1.0.0** (November 2026): first release as an installable PortD 1.0 program (package format 3).

@@ -21,7 +21,7 @@ Click a program's name for its own guide: how to use it, its keys, where it keep
 
 ## Installing a program
 
-1. Open the program's folder above and download its `.portdapp` file (on GitHub, use the **Download raw file** button).
+1. Download the program's `.portdapp` file from the [latest release](https://github.com/SimpleWalker/PortD-App-Hub/releases/latest), or from its folder above (on GitHub, use the **Download raw file** button).
 2. In PortD, open **Settings** and choose **Programs**.
 3. Press **Install a program…** and pick the file.
 4. Check what PortD shows you and press **Install**.
@@ -41,7 +41,7 @@ To **update**, install the newer file the same way. Your saved data is kept. To 
 
 ## Which PortD
 
-These programs need **PortD 1.0** (package format 3). The older 0.x prototype can't install them, and PortD 1.0 doesn't install the old 0.x packages. The four games here are the 0.x games ported to 1.0, keeping their version numbers.
+These programs need **PortD 1.0** or later (package format 3). Get PortD from [SimpleWalker/PortD](https://github.com/SimpleWalker/PortD).
 
 ## For developers and AI agents
 

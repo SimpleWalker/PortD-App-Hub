@@ -11,6 +11,7 @@ The target is **Microsoft Edge on Windows** (Chrome has the same engine). Progra
 ```
 README.md            user guide, with the table of programs
 AGENTS.md            this file
+CLAUDE.md            points to this file, for tools that look for CLAUDE.md
 LICENSE
 package.json         npm run build / npm test (Playwright is the only dependency)
 build/
@@ -58,7 +59,7 @@ A `.portdapp` is a JSON file:
 | `files` | Paths use `/`. `enc` is `text`, or `dataurl` for binary files. `manifest.json` is not allowed (PortD writes it). |
 | Limits | 256 files, 8 MB per file, 24 MB in all. |
 
-PortD 1.0 refuses packages with `formatVersion` below 3, which includes every 0.x package.
+PortD 1.0 refuses packages with `formatVersion` below 3, including the packages of earlier, unreleased versions.
 
 You never write the package by hand. Put the manifest fields in `app.json` and the files in `src/`, then run the packer.
 
@@ -182,7 +183,6 @@ Tests print `ok` / `FAIL` per check and end with `N checks: N passed, 0 failed`.
 - **Saving:** save as you go, because the window can be closed at any moment. Keep files in the data folder small and in readable JSON.
 - **Versions:**
   - New apps start at 1.0.0.
-  - The four game ports kept their live 0.x version number (1.0.0).
   - Bump the version for any change you release, and add a changelog entry to the app README.
 - **Tests:** each app keeps a test hook on `window.__<short>` (for example `__sc`) so tests can set up states. Don't use it in program code.
 - **Git:** the default branch is `master`. Use one commit per app or per change, with a clear message (`starlight-cafe: …`). Commit the rebuilt `.portdapp` and `test-results.txt` with the source change.

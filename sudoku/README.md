@@ -13,7 +13,7 @@ Version 1.0.0 · for PortD 1.0 · file: `sudoku-1.0.0.portdapp`
 
 If the `.portdapp` file is already on your PortD drive, double-click it to get the same Install screen. You can also drop it onto the PortD desktop and choose **Install…**.
 
-After installing you get a **Sudoku** icon on the desktop, and the game is listed in the PortD menu. The old 0.x package doesn't install in PortD 1.0, so use this one.
+After installing you get a **Sudoku** icon on the desktop, and the game is listed in the PortD menu.
 
 ## How to play
 
@@ -83,18 +83,16 @@ Your PortD backup (**Settings > Data > Download backup**) includes this folder. 
 
 ## Outside PortD
 
-You can also open `src/index.html` straight in Edge or Chrome. Your game and statistics are then kept in the browser (0.x saved nothing outside PortD).
+You can also open `src/index.html` straight in Edge or Chrome. Your game and statistics are then kept in the browser.
 
 ## Known limits
 
 - Difficulty is set by how many numbers are given, not by the solving techniques a puzzle needs, so two puzzles at the same level can feel different.
-- Games and statistics from the 0.x prototype can't be carried over, because PortD 1.0 doesn't open 0.x data.
 
 ## Changelog
 
-**1.0.0** (November 2026): the live 0.x game, ported to PortD 1.0 (package format 3). The version number is unchanged.
-- The puzzles, rules and every 0.x feature are the same. The saved files have the same names and contents.
-- Now a folder of files (page, stylesheet, scripts) instead of a single file.
-- Added in the port: a theme button (it still follows the system unless you choose); screen reader labels for every cell and button; F1 and Esc for the statistics box; Reset stats asks for a second click; saving outside PortD.
-- Space pauses unless a button has the keyboard, so Space can press that button as usual.
-- PortD's notice now reads *"Sudoku: easy solved in 04:12"* instead of naming the game twice.
+**1.0.0** (November 2026): first release for PortD 1.0 (package format 3).
+- Four difficulties, pencil notes, hints, undo and statistics; your game is saved as you play.
+- Light and dark following the system, with a theme button.
+- Screen reader labels for every cell and button; F1 and Esc for the statistics box; Reset stats asks for a second click.
+- Your game is also kept when it runs outside PortD.

@@ -13,7 +13,7 @@ Version 1.0.0 · for PortD 1.0 · file: `starlight-cafe-1.0.0.portdapp`
 
 If the `.portdapp` file is already on your PortD drive, double-click it to get the same Install screen. You can also drop it onto the PortD desktop and choose **Install…**.
 
-After installing you get a **Starlight Café** icon on the desktop, and the game is listed in the PortD menu. The old 0.x package doesn't install in PortD 1.0, so use this one.
+After installing you get a **Starlight Café** icon on the desktop, and the game is listed in the PortD menu.
 
 Starlight Café opens in one window only: starting it again brings that window to the front. It doesn't open any files.
 
@@ -72,8 +72,6 @@ The game follows your system's light or dark setting. The dark version is a nigh
 
 Your PortD backup (**Settings > Data > Download backup**) includes this folder. Uninstalling keeps it.
 
-The save format is unchanged from 0.x. A `save.json` from the 0.x game placed in this folder is loaded as it was.
-
 ## Updating and uninstalling
 
 - **Update:** install a newer `.portdapp` the same way. Your café and settings are kept.
@@ -81,21 +79,18 @@ The save format is unchanged from 0.x. A `save.json` from the 0.x game placed in
 
 ## Outside PortD
 
-You can also open `src/index.html` straight in Edge or Chrome. Your café is then kept in the browser, as in 0.x.
+You can also open `src/index.html` straight in Edge or Chrome. Your café is then kept in the browser.
 
 ## Known limits
 
 - Stars earned while away stop counting after 8 hours.
 - Wishes are random, so two players will see different friends; the 60-wish guarantee is the only promise.
-- Your 0.x café doesn't carry over by itself, because PortD 1.0 doesn't open 0.x data.
 
 ## Changelog
 
-**1.0.0** (November 2026): the live 0.x game, ported to PortD 1.0 (package format 3). The version number is unchanged.
+**1.0.0** (November 2026): first release for PortD 1.0 (package format 3).
 
-- **Unchanged:** the rules, numbers, characters, art and every 0.x feature. The save file is the same.
-- **Added in the port:**
-  - Keyboard use: 1 to 4 for tabs, arrow keys on the tab bar, Space or Enter on the moon, and Esc to close.
-  - Labels for screen readers.
-  - A dark theme that follows the system, with a theme button.
-- **Changed:** PortD's notice now reads *"Starlight Café: ✨ Aurora joined your café!"* instead of naming the game twice.
+- 13 café friends in three rarities, wishes with a 60-wish guarantee, levels, bonds, milestones, a daily gift and a gem shop.
+- Keyboard use: 1 to 4 for tabs, arrow keys on the tab bar, Space or Enter on the moon, and Esc to close.
+- Labels for screen readers.
+- Light and dark following the system, with a theme button.
