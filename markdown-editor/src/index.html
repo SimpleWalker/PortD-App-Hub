@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-app="markdown-editor">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Markdown Editor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="File and view">
+    <button id="newBtn" class="btn" title="New document">New</button>
+    <button id="openBtn" class="btn" title="Open (Ctrl+O)">Open…</button>
+    <button id="saveBtn" class="btn" title="Save (Ctrl+S)">Save</button>
+    <button id="saveAsBtn" class="btn" title="Save as (Ctrl+Shift+S)">Save as…</button>
+    <button id="exportBtn" class="btn" title="Save the preview as a web page">Export as HTML…</button>
+    <span class="grow"></span>
+    <span class="seg" role="group" aria-label="View (Ctrl+Shift+E)">
+      <button class="btn" data-view="source" aria-pressed="false" title="Source only">Source</button><button class="btn" data-view="split" aria-pressed="true" title="Source and preview side by side">Split</button><button class="btn" data-view="preview" aria-pressed="false" title="Preview only">Preview</button>
+    </span>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+    <button id="helpBtn" class="btn icon" title="Help and shortcuts (F1)" aria-label="Help">?</button>
+  </div>
+  <div class="bar fmt" id="fmtBar" role="toolbar" aria-label="Formatting">
+    <button class="btn icon" data-cmd="bold" title="Bold (Ctrl+B)" aria-label="Bold"><b>B</b></button>
+    <button class="btn icon" data-cmd="italic" title="Italic (Ctrl+I)" aria-label="Italic"><i>I</i></button>
+    <button class="btn icon" data-cmd="strike" title="Strikethrough" aria-label="Strikethrough"><s>S</s></button>
+    <button class="btn icon" data-cmd="heading" title="Heading: # → ## → ### → none (Ctrl+Shift+H)" aria-label="Heading">H</button>
+    <button class="btn icon" data-cmd="code" title="Code (Ctrl+E)" aria-label="Code"><span class="mono">&lt;/&gt;</span></button>
+    <span class="sep"></span>
+    <button class="btn icon" data-cmd="ul" title="Bulleted list (Ctrl+Shift+8)" aria-label="Bulleted list">•≡</button>
+    <button class="btn icon" data-cmd="ol" title="Numbered list (Ctrl+Shift+7)" aria-label="Numbered list">1≡</button>
+    <button class="btn icon" data-cmd="task" title="Checklist (Ctrl+Shift+9)" aria-label="Checklist">☑</button>
+    <button class="btn icon" data-cmd="quote" title="Quote" aria-label="Quote">❝</button>
+    <span class="sep"></span>
+    <button class="btn" data-cmd="link" title="Link (Ctrl+K)">Link</button>
+    <button class="btn" data-cmd="picture" title="Insert a picture from the drive">Picture…</button>
+    <button class="btn" data-cmd="table" title="Insert a table">Table</button>
+    <button class="btn" data-cmd="codeblock" title="Insert a code block">Code block</button>
+    <button class="btn icon" data-cmd="hr" title="Horizontal line" aria-label="Horizontal line">―</button>
+  </div>
+  <div id="banner" class="banner" role="alert" hidden></div>
+  <div id="panes" class="panes split">
+    <textarea id="src" spellcheck="true" aria-label="Markdown source" placeholder="Write here. # Heading, **bold**, *italic*, - list, [link](https://…)"></textarea>
+    <div id="prev" class="preview" tabindex="0" role="document" aria-label="Preview"></div>
+  </div>
+  <div class="status" aria-live="polite"><span id="stFile"></span><span id="stState"></span><span id="stPos"></span><span id="stWords"></span></div>
+</div>
+
+<div id="askDlg" class="ov" hidden>
+  <div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="askTitle" aria-describedby="askMsg">
+    <h2 id="askTitle"></h2>
+    <p id="askMsg"></p>
+    <div class="acts" id="askActs"></div>
+  </div>
+</div>
+
+<div id="linkDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="linkTitle">
+    <h2 id="linkTitle">Link</h2>
+    <label class="frow">Text <input id="linkText" class="field"></label>
+    <label class="frow">Address <input id="linkUrl" class="field" placeholder="https://… , mailto:… or #heading"></label>
+    <p id="linkErr" class="err" role="alert"></p>
+    <div class="acts"><button class="btn" data-act="cancel">Cancel</button><button class="btn primary" data-act="ok">Insert</button></div>
+  </div>
+</div>
+
+<div id="copyDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true"><h2>Copy</h2><textarea id="copyText" readonly rows="6"></textarea><div class="acts"><button class="btn primary" data-act="cancel">Close</button></div></div>
+</div>
+
+<div id="helpDlg" class="ov" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">Markdown Editor</h2>
+    <div class="cols">
+      <table class="keys">
+        <tr><th colspan="2">Keys</th></tr>
+        <tr><td>Ctrl+O / Ctrl+S</td><td>Open / Save</td></tr>
+        <tr><td>Ctrl+Shift+S</td><td>Save as</td></tr>
+        <tr><td>Ctrl+B / Ctrl+I</td><td>Bold / italic</td></tr>
+        <tr><td>Ctrl+K</td><td>Link</td></tr>
+        <tr><td>Ctrl+E</td><td>Code</td></tr>
+        <tr><td>Ctrl+Shift+H</td><td>Heading level</td></tr>
+        <tr><td>Ctrl+Shift+7 / 8 / 9</td><td>Numbered list / bullets / checklist</td></tr>
+        <tr><td>Enter in a list</td><td>Next item (twice ends the list)</td></tr>
+        <tr><td>Tab / Shift+Tab in a list</td><td>Indent / outdent the item</td></tr>
+        <tr><td>Esc, then Tab</td><td>Leave the text box</td></tr>
+        <tr><td>Ctrl+Shift+E</td><td>Source → Split → Preview</td></tr>
+        <tr><td>F1</td><td>This help</td></tr>
+      </table>
+      <table class="keys">
+        <tr><th colspan="2">Markdown</th></tr>
+        <tr><td># Title, ## Part</td><td>Headings</td></tr>
+        <tr><td>**bold** *italic*</td><td>Emphasis</td></tr>
+        <tr><td>~~gone~~ `code`</td><td>Struck out, code</td></tr>
+        <tr><td>- item, 1. item</td><td>Lists</td></tr>
+        <tr><td>- [ ] task</td><td>Checklist</td></tr>
+        <tr><td>&gt; quoted</td><td>Quote</td></tr>
+        <tr><td>[text](https://…)</td><td>Link</td></tr>
+        <tr><td>![text](picture.png)</td><td>Picture</td></tr>
+        <tr><td>| a | b |</td><td>Table</td></tr>
+        <tr><td>``` … ```</td><td>Code block</td></tr>
+        <tr><td>---</td><td>Line</td></tr>
+      </table>
+    </div>
+    <p class="muted small">HTML written in the text is shown as text, never run. Only web and email links can be followed.</p>
+    <div class="acts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/markdown.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
