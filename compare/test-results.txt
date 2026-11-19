@@ -1,0 +1,84 @@
+Compare tests
+  package  compare-1.0.0.portdapp
+  portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names it, its version and description, and lists no file types
+  ok    …file count, where it goes and the permission note
+  ok    installed: folder, toast, desktop shortcut, and no file-type notice
+
+Two files, opened from inside Compare
+  ok    it starts on the Texts tab with the left side ready for typing
+  ok    the left Open… button shows PortD's Open dialog for the left side
+  ok    the file appears on the left, named
+  ok    Ctrl+O then opens a file for the right side
+  ok    with both sides filled, it compares at once
+  ok    the summary counts changes and lines
+
+Side by side
+  ok    removed lines on the left, added on the right, changed lines paired
+  ok    changed words are marked inside a changed line
+  ok    a line that is mostly different is marked as a whole line, not word by word
+  ok    a long unchanged stretch is folded, with 3 lines kept around the changes
+  ok    …so only a few rows are drawn
+  ok    "Show" opens the fold
+  ok    "All lines" shows everything, and is remembered
+
+Moving between changes
+  ok    F7 goes to the first change and marks it
+  ok    F7 again goes to the second
+  ok    …and after the last one wraps round to the first
+  ok    Shift+F7 goes back, round to the last
+  ok    the Previous button too
+
+Unified view and options
+  ok    Unified shows one column with − and + and both line numbers
+  ok    …and the choice is saved
+  ok    Ignore case: Pears/pears is no longer a change
+  ok    …and a note says what is ignored
+  ok    changed words can be switched off
+
+The unified diff: copy and save
+  ok    Copy unified diff puts a standard unified diff on the clipboard
+  ok    …and says so
+  ok    Ctrl+S asks where to save it, named after both files
+  ok    the .diff file holds the same unified diff
+
+Pasted texts, editing, swapping
+  ok    Esc goes back to the texts
+  ok    editing a file's text marks it as edited
+  ok    Ctrl+Enter compares the edited texts
+  ok    Swap sides swaps the texts and their names
+  ok    pasted texts are labelled as such
+  ok    a change in spacing is found
+  ok    "Ignore space changes" makes them the same, and says so
+  ok    …with Copy and Save switched off
+  ok    a missing line break at the end is a difference, and the diff says "No newline"
+
+Opening files with Compare from Files
+  ok    "Choose another program…" lists Compare
+  ok    a file opened with Compare goes on the left, and it asks for the other one
+  ok    a second file goes into the same window, on the right, and they are compared
+  ok    different line endings are noted but not counted
+  ok    the files given to it are not changed
+
+Large files
+  note  20,000 lines against 20,000 with 200 changes: compared and drawn 580 ms after choosing the second file
+  ok    200 changes found in 20,000 lines
+  ok    folding keeps the page small
+
+Theme, and reloading
+  ok    after reloading PortD, the dark theme and the unified layout are kept
+
+No errors
+  ok    no console errors in PortD or in Compare
+
+Outside PortD: the page opened straight from its folder
+  ok    it opens on the Texts tab, following the system's dark theme
+  ok    two files from the browser's file picker are compared
+  ok    the unified diff is copied (clipboard API)
+  ok    Save diff… downloads it
+  ok    no console errors outside PortD
+
+53 checks: 53 passed, 0 failed

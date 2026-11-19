@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-app="compare">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compare</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="Compare">
+    <span class="seg" role="tablist" aria-label="Show">
+      <button id="tabTexts" class="btn" role="tab" aria-selected="true" aria-controls="texts">Texts</button><button id="tabDiff" class="btn" role="tab" aria-selected="false" aria-controls="diff" title="Compare (Ctrl+Enter)">Differences</button>
+    </span>
+    <span class="sep"></span>
+    <span class="seg" role="group" aria-label="Layout">
+      <button id="sideBtn" class="btn" aria-pressed="true">Side by side</button><button id="uniBtn" class="btn" aria-pressed="false">Unified</button>
+    </span>
+    <select id="space" class="field" aria-label="White space" title="White space">
+      <option value="none">Spaces count</option>
+      <option value="change">Ignore space changes</option>
+      <option value="all">Ignore all spaces</option>
+    </select>
+    <label class="chk"><input type="checkbox" id="caseless"> Ignore case</label>
+    <label class="chk"><input type="checkbox" id="words" checked> Show changed words</label>
+    <select id="context" class="field" aria-label="Unchanged lines shown around changes" title="Unchanged lines shown around changes">
+      <option value="3">3 lines around changes</option>
+      <option value="10">10 lines around changes</option>
+      <option value="all">All lines</option>
+    </select>
+    <span class="grow"></span>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+    <button id="helpBtn" class="btn icon" title="Help and shortcuts (F1)" aria-label="Help">?</button>
+  </div>
+
+  <div id="texts" class="texts" role="tabpanel" aria-labelledby="tabTexts">
+    <div class="side" data-side="a">
+      <div class="shead"><b class="sname" id="nameA">Left</b>
+        <button class="btn" data-open="a" title="Open a file for the left side">Open…</button>
+        <button class="btn" data-clear="a">Clear</button></div>
+      <textarea id="textA" spellcheck="false" wrap="off" aria-label="Left text" placeholder="Open a file, or paste the first text here"></textarea>
+    </div>
+    <div class="side" data-side="b">
+      <div class="shead"><b class="sname" id="nameB">Right</b>
+        <button class="btn" data-open="b" title="Open a file for the right side">Open…</button>
+        <button class="btn" data-clear="b">Clear</button></div>
+      <textarea id="textB" spellcheck="false" wrap="off" aria-label="Right text" placeholder="Open a file, or paste the second text here"></textarea>
+    </div>
+    <div class="actions">
+      <button id="compareBtn" class="btn primary" title="Ctrl+Enter">Compare</button>
+      <button id="swapBtn" class="btn">Swap sides</button>
+    </div>
+  </div>
+
+  <div id="diff" class="diffpane" role="tabpanel" aria-labelledby="tabDiff" hidden>
+    <div class="dbar">
+      <span id="summary" class="summary" role="status"></span>
+      <span class="grow"></span>
+      <button id="prevBtn" class="btn" title="Previous change (Shift+F7)">↑ Previous</button>
+      <button id="nextBtn" class="btn" title="Next change (F7)">↓ Next</button>
+      <button id="copyBtn" class="btn" title="Copy the differences as a unified diff">Copy unified diff</button>
+      <button id="saveBtn" class="btn" title="Save the unified diff as a file (Ctrl+S)">Save diff…</button>
+    </div>
+    <div id="notes" class="notes" hidden></div>
+    <div id="out" class="out" tabindex="0" aria-label="Differences"></div>
+  </div>
+  <div class="status" aria-live="polite"><span id="stA"></span><span id="stB"></span></div>
+</div>
+
+<div id="copyDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="copyTitle">
+    <h2 id="copyTitle">Copy</h2>
+    <p>This window is not allowed to use the clipboard. The text is selected below: press Ctrl+C to copy it.</p>
+    <textarea id="copyText" readonly rows="10"></textarea>
+    <div class="acts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+<div id="helpDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">Compare</h2>
+    <p>Put a text on each side, from a file or pasted in, then press <b>Compare</b>. Removed lines are red on the left, added lines green on the right, and inside a changed line the words that changed are marked.</p>
+    <table class="keys">
+      <tr><td>Ctrl+Enter</td><td>Compare</td></tr>
+      <tr><td>F7 / Shift+F7</td><td>Next / previous change</td></tr>
+      <tr><td>Ctrl+S</td><td>Save the unified diff</td></tr>
+      <tr><td>Ctrl+Shift+C</td><td>Copy the unified diff</td></tr>
+      <tr><td>Ctrl+O</td><td>Open a file for the left side (then the right)</td></tr>
+      <tr><td>Esc</td><td>Back to the texts</td></tr>
+      <tr><td>F1</td><td>This help</td></tr>
+    </table>
+    <div class="acts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/diff.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
