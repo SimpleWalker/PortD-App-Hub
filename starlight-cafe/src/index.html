@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Starlight Café</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <img class="logo" src="assets/logo.svg" alt="">
+    <div class="title">Starlight Café</div>
+    <div class="pills">
+      <div class="pill" id="starPill" role="status" aria-live="off" title="Stars – earned by your café friends, spent on levels and the gem shop">✨ <b id="stars">0</b><small id="income">+0/s</small></div>
+      <div class="pill gem" id="gemPill" title="Gems – spent on wishes">💎 <b id="gems">0</b></div>
+    </div>
+    <button id="themeBtn" class="iconBtn" type="button"></button>
+  </header>
+
+  <main>
+    <!-- Café -->
+    <section id="tab-cafe" class="tab show" role="tabpanel" aria-labelledby="tb-cafe">
+      <div class="moonbox">
+        <button id="moon" class="moon" aria-label="Tap the moon for stars">
+          <img src="assets/logo.svg" alt="">
+        </button>
+        <div class="hint">Tap the moon! Your friends brew stars even while you're away.</div>
+      </div>
+      <h2>Your café friends</h2>
+      <div id="friends" class="friends"></div>
+    </section>
+
+    <!-- Wish -->
+    <section id="tab-wish" class="tab" role="tabpanel" aria-labelledby="tb-wish">
+      <div class="banner">
+        <div class="bannerArt"><img id="featuredArt" alt=""></div>
+        <div class="bannerText">
+          <div class="bannerTag">Limited wish</div>
+          <h2 id="bannerName">Twinkle Tea Party</h2>
+          <p id="bannerDesc"></p>
+          <p class="rates">SSR 3% · SR 17% · R 80% · ×10 guarantees SR or better</p>
+          <p class="pity">SSR guaranteed in <b id="pity">60</b> wishes</p>
+        </div>
+      </div>
+      <div class="wishBtns">
+        <button id="wish1" class="btn big">Wish ×1<small>💎 100</small></button>
+        <button id="wish10" class="btn big pri">Wish ×10<small>💎 1000</small></button>
+      </div>
+      <p class="muted center">Duplicates raise a friend's bond: +25% stars each, up to 10. After that they turn into gems.</p>
+    </section>
+
+    <!-- Collection -->
+    <section id="tab-album" class="tab" role="tabpanel" aria-labelledby="tb-album">
+      <h2>Album <small id="albumCount"></small></h2>
+      <div id="album" class="album"></div>
+    </section>
+
+    <!-- Quests & shop -->
+    <section id="tab-quests" class="tab" role="tabpanel" aria-labelledby="tb-quests">
+      <div class="row2">
+        <div class="card">
+          <h3>Daily gift</h3>
+          <p class="muted">A gift of gems every day.</p>
+          <button id="daily" class="btn pri">Claim 💎 150</button>
+        </div>
+        <div class="card">
+          <h3>Gem shop</h3>
+          <p class="muted">Trade stars for gems. The price rises a little each time.</p>
+          <button id="shop" class="btn">💎 25 for ✨ <span id="shopPrice">200</span></button>
+        </div>
+      </div>
+      <h2>Milestones</h2>
+      <div id="milestones" class="milestones"></div>
+      <h2>Stats</h2>
+      <div id="stats" class="card stats"></div>
+      <p class="center"><button id="reset" class="btn small danger">Start over</button></p>
+    </section>
+  </main>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button id="tb-cafe" role="tab" aria-selected="true" data-tab="cafe" class="on" title="Café (1)"><i aria-hidden="true">☕</i><span>Café</span></button>
+    <button id="tb-wish" role="tab" aria-selected="false" tabindex="-1" data-tab="wish" title="Wish (2)"><i aria-hidden="true">🌟</i><span>Wish</span><i id="wishDot" class="dot"></i></button>
+    <button id="tb-album" role="tab" aria-selected="false" tabindex="-1" data-tab="album" title="Album (3)"><i aria-hidden="true">📖</i><span>Album</span></button>
+    <button id="tb-quests" role="tab" aria-selected="false" tabindex="-1" data-tab="quests" title="Quests (4)"><i aria-hidden="true">🎁</i><span>Quests</span><i id="questDot" class="dot"></i></button>
+  </nav>
+</div>
+
+<!-- Wish results -->
+<div id="results" class="overlay" role="dialog" aria-modal="true" aria-label="Wish results">
+  <div class="resultsInner">
+    <div id="resultCards" class="resultCards"></div>
+    <div class="resultsFoot"><button id="resultsSkip" class="btn">Reveal all</button><button id="resultsClose" class="btn pri">OK</button></div>
+  </div>
+</div>
+
+<!-- Character details -->
+<div id="detail" class="overlay" role="dialog" aria-modal="true" aria-labelledby="dName">
+  <div class="detailCard">
+    <img id="dArt" alt="">
+    <div class="dInfo">
+      <div id="dRarity" class="rarity"></div>
+      <h2 id="dName"></h2>
+      <div id="dTitle" class="muted"></div>
+      <p id="dQuote" class="quote"></p>
+      <div id="dStats" class="dStats"></div>
+    </div>
+    <button id="dClose" class="btn">Close</button>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="js/host.js"></script>
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

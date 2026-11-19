@@ -1,0 +1,12 @@
+{
+  "id": "starlight-cafe",
+  "name": "Starlight Café",
+  "version": "1.0.0",
+  "description": "A cute idle gacha: tap the moon, wish for café friends, level them up and collect them all",
+  "icon": "emoji:🌙",
+  "entry": "index.html",
+  "width": 760,
+  "height": 640,
+  "singleInstance": true,
+  "fileTypes": []
+}

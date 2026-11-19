@@ -1,0 +1,98 @@
+Starlight Café tests
+  package  starlight-cafe-1.0.0.portdapp
+  portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing the ported package
+  ok    PortD 1.0 accepts the format 3 package: Starlight Café 1.0.0, 23 files
+  ok    installed, with a desktop shortcut
+
+A new café
+  ok    it starts with 300 gems, no stars and Mochi as the starter friend
+  ok    a welcome message, and the window is titled Starlight Café
+  ok    pictures load inside PortD: the logo and background are inlined, portraits come from PortD.assets
+  ok    it follows the system theme (light here)
+
+Tapping the moon and earning stars
+  ok    5 mouse clicks on the moon are 5 taps, each at least 1 star
+  ok    each tap shows a floating +stars
+  ok    the focused moon taps with Space or Enter; a held key counts once
+  ok    a touch tap on the moon counts once
+  ok    Mochi brews about 1 star a second, shown as +1/s
+
+Levelling up
+  ok    the level-up button shows its price and has a spoken label
+  ok    Level up costs 15 stars and raises Mochi to level 2 (2 stars a second)
+  ok    Max buys as many levels as the stars allow (3 more here: 18 + 20 + 23 stars)
+  ok    with too few stars, the buttons are greyed
+
+Wishes
+  ok    key 2 opens the Wish tab, and the tab bar says so
+  ok    the banner shows Aurora and the pity count (60)
+  ok    with 300 gems, Wish ×1 is ready and Wish ×10 is greyed
+  ok    Wish ×1 costs 100 gems; a duplicate Mochi raises her bond to 1
+  ok    the results open with focus on OK, and the card is labelled for screen readers
+  ok    the card turns over on its own
+  ok    Tab stays inside the results
+  ok    Esc closes the results and focus goes back to Wish ×1
+  ok    Wish ×10 costs 1000 gems and the tenth is lifted to SR when the first nine are all R
+  ok    ten cards, and Reveal all turns them all over at once
+  ok    …all ten open
+  ok    OK closes, and the café now lists Mochi, Rin and Peach (rarest first)
+  ok    the pity counter says 1 wish to go
+  ok    the 60th wish without an SSR is an SSR, and here Aurora; pity starts again
+  ok    an SSR is announced through PortD once, without the name twice
+  ok    Enter on OK closes the results
+  ok    a friend at full bond (10) turns into gems instead: +75 for an R
+  ok    with too few gems for a wish, the button is greyed
+
+Album and friend details
+  ok    key 3 opens the Album: 4 / 13 met
+  ok    friends not met yet are shadows marked ???, labelled "Not met yet"
+  ok    Enter on a met friend opens the details: name, title, quote, level and bond
+  ok    Esc closes the details and focus goes back to the album card
+  ok    clicking a portrait in the café also opens the details
+  ok    clicking outside the card closes it
+  ok    arrow keys move along the tab bar
+  ok    …and End goes to Quests
+
+Quests: daily gift, gem shop, milestones
+  ok    the Quests tab has a dot while there is something to claim
+  ok    the daily gift gives 150 gems once a day
+  ok    the gem shop trades 200 stars for 25 gems, and the price goes up to 216
+  ok    milestones already reached can be claimed: Befriend… not yet, Meet an SSR friend yes
+  ok    claiming gives its gems once and ticks it
+  ok    stats list stars earned, wishes, taps and friends
+
+Saving, and coming back later
+  ok    the café is saved to P:\User\Config\starlight-cafe\save.json in the 0.x format (v 1)
+  ok    it also saves on its own every 5 seconds
+  ok    starting it again while it is open brings back the same window (single instance)
+  ok    after closing it and reloading PortD, the café is resumed
+  ok    an hour away earns half the income: 61.5/s × 3600 s ÷ 2 = 110,700 stars, with a welcome back message
+  ok    time away counts for at most 8 hours
+
+Starting over
+  ok    Start over asks for a second click and keeps the save
+  ok    a second click after more than 3 seconds only asks again
+  ok    two clicks in a row start a fresh café, and it is saved
+
+Theme
+  ok    the theme button goes to light, then dark, and is saved
+  ok    dark colours: dark page, light text
+  ok    …and back to following the system
+
+A save from Starlight Café 0.x
+  ok    is loaded as before: gems, friends, counters kept; unknown friends and bad numbers repaired
+  ok    …and the daily gift is ready again
+
+No errors
+  ok    no console errors in PortD or in Starlight Café
+
+Outside PortD: the page opened straight from its folder
+  ok    it runs, follows the system's dark theme, and the portraits load from the folder
+  ok    touch taps on the moon count
+  ok    the café is kept in localStorage (starlight-cafe-save, as in 0.x) and resumed
+  ok    no console errors outside PortD
+
+66 checks: 66 passed, 0 failed
