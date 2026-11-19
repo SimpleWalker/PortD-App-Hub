@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-app="json-viewer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JSON Viewer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="JSON Viewer">
+    <button id="openBtn" class="btn" title="Open a file (Ctrl+O)">Open…</button>
+    <button id="pasteBtn" class="btn" title="Paste JSON text to view it">Paste…</button>
+    <span class="seg" role="group" aria-label="View">
+      <button id="treeBtn" class="btn" aria-pressed="true" disabled>Tree</button><button id="rawBtn" class="btn" aria-pressed="false" disabled title="Raw text (R in the tree)">Raw</button>
+    </span>
+    <button id="expandBtn" class="btn" disabled title="Expand everything (or as much as is sensible)">Expand all</button>
+    <button id="collapseBtn" class="btn" disabled>Collapse all</button>
+    <span class="sep"></span>
+    <input id="search" class="field grow" type="search" placeholder="Search" title="Search keys and values (Ctrl+F)" aria-label="Search keys and values" disabled>
+    <button id="prevBtn" class="btn icon" title="Previous match (Shift+F3)" aria-label="Previous match" disabled>↑</button>
+    <button id="nextBtn" class="btn icon" title="Next match (F3)" aria-label="Next match" disabled>↓</button>
+    <span id="hits" class="muted hits" aria-live="polite"></span>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+    <button id="helpBtn" class="btn icon" title="Keyboard shortcuts (F1)" aria-label="Help">?</button>
+  </div>
+  <div id="warn" class="warn" role="status" hidden></div>
+  <div id="main" class="main">
+    <div id="tree" class="tree" tabindex="0" role="tree" aria-label="JSON" hidden><div id="rows" class="rows"></div></div>
+    <div id="results" class="results" hidden>
+      <div class="rhead"><span id="rcount"></span><button id="rclose" class="btn icon" aria-label="Close the list of matches" title="Close the list">×</button></div>
+      <div id="rlist" class="rlist" role="listbox" aria-label="Matches" tabindex="0"></div>
+    </div>
+    <div id="raw" class="raw" hidden>
+      <div class="rawbar"><span class="seg" role="group" aria-label="Raw text">
+        <button id="asFile" class="btn" aria-pressed="true">As in the file</button><button id="asPretty" class="btn" aria-pressed="false">Formatted</button></span>
+        <button id="copyRaw" class="btn">Copy all</button>
+        <span id="rawInfo" class="muted"></span></div>
+      <div class="rawwrap"><div id="gutter" class="gutter" aria-hidden="true"></div><textarea id="rawText" readonly spellcheck="false" wrap="off" aria-label="Raw text"></textarea></div>
+    </div>
+    <div id="error" class="error" hidden>
+      <h2>This is not valid JSON</h2>
+      <p id="errMsg" class="errmsg"></p>
+      <pre id="errCtx" class="ctx"></pre>
+      <button id="errRaw" class="btn primary">Show it in the raw text</button>
+    </div>
+    <div id="empty" class="empty">
+      <div>
+        <img src="icon.svg" alt="" width="64" height="64">
+        <h1>JSON Viewer</h1>
+        <p>Open a JSON file to explore it as a tree.</p>
+        <button id="openBig" class="btn primary">Open a file…</button> <button id="pasteBig" class="btn">Paste JSON…</button>
+        <p class="muted small">You can also drop a file on this window.</p>
+      </div>
+    </div>
+  </div>
+  <div class="status" aria-live="polite"><span id="stFile"></span><span id="stInfo"></span><span id="stPath" class="pathinfo"></span></div>
+</div>
+
+<div id="menu" class="menu" role="menu" hidden>
+  <button role="menuitem" data-cmd="value">Copy value</button>
+  <button role="menuitem" data-cmd="path">Copy path</button>
+  <button role="menuitem" data-cmd="pointer">Copy JSON Pointer</button>
+  <button role="menuitem" data-cmd="key">Copy key</button>
+  <hr>
+  <button role="menuitem" data-cmd="expand">Expand all below</button>
+  <button role="menuitem" data-cmd="collapse">Collapse all below</button>
+</div>
+
+<div id="pasteDlg" class="ov" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="pasteTitle">
+    <h2 id="pasteTitle">Paste JSON</h2>
+    <p class="muted">Paste or type JSON text, then press View.</p>
+    <textarea id="pasteText" rows="12" spellcheck="false" aria-label="JSON text"></textarea>
+    <div class="acts"><button class="btn" data-act="cancel">Cancel</button><button class="btn primary" data-act="ok">View</button></div>
+  </div>
+</div>
+
+<div id="copyDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="copyTitle">
+    <h2 id="copyTitle">Copy</h2>
+    <p>This window is not allowed to use the clipboard. The text is selected below: press Ctrl+C to copy it.</p>
+    <textarea id="copyText" readonly rows="8"></textarea>
+    <div class="acts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+
+<div id="helpDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">Keyboard shortcuts</h2>
+    <table class="keys">
+      <tr><td>Ctrl+O</td><td>Open a file</td></tr>
+      <tr><td>Ctrl+F</td><td>Search keys and values</td></tr>
+      <tr><td>Enter, F3</td><td>Next match (Shift for the previous one)</td></tr>
+      <tr><td>Up / Down</td><td>Move through the tree</td></tr>
+      <tr><td>Right / Left</td><td>Open / close an item, or go to its first child / its parent</td></tr>
+      <tr><td>Enter, Space</td><td>Open or close an item</td></tr>
+      <tr><td>*</td><td>Open everything below the item</td></tr>
+      <tr><td>Home / End, Page Up / Down</td><td>First / last item, a page at a time</td></tr>
+      <tr><td>Ctrl+C</td><td>Copy the item's value</td></tr>
+      <tr><td>Ctrl+Shift+C</td><td>Copy the item's path</td></tr>
+      <tr><td>Shift+F10, Menu key</td><td>More copy choices</td></tr>
+      <tr><td>R</td><td>Raw text; Esc goes back to the tree</td></tr>
+      <tr><td>F1</td><td>This list</td></tr>
+    </table>
+    <div class="acts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/json.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
