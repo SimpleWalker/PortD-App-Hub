@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-app="solitaire">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solitaire</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <button id="newBtn" title="New game (F2)">New game</button>
+    <select id="drawSel" title="Cards turned from the stock" aria-label="Cards turned from the stock">
+      <option value="1">Draw 1</option>
+      <option value="3">Draw 3</option>
+    </select>
+    <button id="undoBtn" title="Undo (Ctrl+Z)">↶ Undo</button>
+    <button id="autoBtn" title="Move every card to the foundations (A)">Auto-finish</button>
+    <span class="spacer"></span>
+    <span class="info" id="score">Score 0</span>
+    <span class="info" id="moves">Moves 0</span>
+    <span class="info" id="time">0:00</span>
+    <button id="themeBtn" class="icon" aria-label="Theme"></button>
+    <button id="menuBtn" title="Statistics and help (F1)" aria-label="Statistics and help">⋯</button>
+  </div>
+  <div id="table" tabindex="0" role="application" aria-roledescription="card table" aria-label="Solitaire table. Arrow keys move, Enter plays a card, M picks up and puts down, Space turns the stock." aria-describedby="say"></div>
+</div>
+<div id="msg"></div>
+<div id="say" class="sr" aria-live="polite"></div>
+
+<div class="dlg" id="infoDlg" role="dialog" aria-modal="true" aria-labelledby="statTitle"><div>
+  <h3 id="statTitle">Statistics</h3>
+  <table id="statTbl"></table>
+  <h3 style="margin-top:14px">How to play</h3>
+  <p style="margin:0">Build each foundation (top right) up by suit from Ace to King. In the seven columns, stack cards down in alternating colours; only a King can fill an empty column.<br>
+  <b>Drag</b> cards to move them, or <b>click/tap</b> a card to send it to the best place. Click the stock to turn cards. <b>Ctrl+Z</b> undo, <b>F2</b> new game, <b>Space</b> turns the stock.<br>
+  <b>Keyboard:</b> arrow keys move between piles and cards, <b>Enter</b> plays the card like a click, <b>M</b> picks cards up and <b>M</b> again puts them down on another pile, <b>A</b> auto-finishes.</p>
+  <div class="row"><button id="statReset">Reset stats</button><button class="pri" id="infoClose">Close</button></div>
+</div></div>
+
+<script src="js/host.js"></script>
+<script src="js/solitaire.js"></script>
+</body>
+</html>

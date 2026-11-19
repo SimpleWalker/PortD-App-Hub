@@ -1,0 +1,12 @@
+{
+  "id": "solitaire",
+  "name": "Solitaire",
+  "version": "1.0.0",
+  "description": "Klondike solitaire, draw 1 or 3, drag or tap to move, undo, statistics",
+  "icon": "emoji:🃏",
+  "entry": "index.html",
+  "width": 800,
+  "height": 620,
+  "singleInstance": false,
+  "fileTypes": []
+}
