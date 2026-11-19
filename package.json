@@ -2,6 +2,7 @@
   "name": "portd-app-hub",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "Programs for PortD 1.0, the portable desktop in one HTML file",
   "scripts": {
     "build": "node build/build-all.js",

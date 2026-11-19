@@ -46,3 +46,7 @@ These programs need **PortD 1.0** (package format 3). The older 0.x prototype ca
 ## For developers and AI agents
 
 See [AGENTS.md](AGENTS.md) for the package format, the rules a program must follow, and how to build and test.
+
+## Licence
+
+MIT: see [LICENSE](LICENSE). You may use, change and share these programs, keeping the copyright notice.
