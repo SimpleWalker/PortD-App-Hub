@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-app="snippets">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snippets</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="Snippets">
+    <button id="newBtn" class="btn primary" title="New snippet (Alt+N)">New</button>
+    <span class="sep"></span>
+    <button id="importBtn" class="btn" title="Add snippets from a library file">Import…</button>
+    <button id="exportBtn" class="btn" title="Save the whole library as one file">Export…</button>
+    <span class="grow"></span>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+    <button id="helpBtn" class="btn icon" title="Keyboard shortcuts (F1)" aria-label="Help">?</button>
+  </div>
+  <div class="main">
+    <aside class="side">
+      <div class="filters">
+        <input id="search" class="field" type="search" placeholder="Search" title="Search titles, tags and text (Ctrl+F)" aria-label="Search titles, tags and text" autocomplete="off">
+        <div class="row2">
+          <select id="tagSel" class="field" aria-label="Show tag"><option value="">All tags</option></select>
+          <select id="sortSel" class="field" aria-label="Sort by"><option value="title">By title</option><option value="used">Last used</option></select>
+        </div>
+      </div>
+      <div id="list" class="list" role="listbox" aria-label="Snippets" tabindex="0"></div>
+      <div id="count" class="count muted" aria-live="polite"></div>
+    </aside>
+    <section id="detail" class="detail" aria-label="Snippet">
+      <div id="view" class="view" hidden>
+        <div class="vhead">
+          <h1 id="vTitle"></h1>
+          <div id="vMeta" class="meta"></div>
+        </div>
+        <div class="acts" role="toolbar" aria-label="This snippet">
+          <button id="copyBtn" class="btn primary" title="Copy the text (Enter in the list, or Ctrl+Enter)">Copy</button>
+          <button id="editBtn" class="btn" title="Edit (F2)">Edit</button>
+          <button id="dupBtn" class="btn" title="Make a copy (Ctrl+D)">Duplicate</button>
+          <button id="pinBtn" class="btn" aria-pressed="false" title="Keep at the top of the list (P in the list)">Pin</button>
+          <button id="delBtn" class="btn danger" title="Delete (Delete in the list, twice)">Delete</button>
+        </div>
+        <pre id="vBody" class="body" tabindex="0" aria-label="Text"></pre>
+      </div>
+      <div id="edit" class="edit" hidden>
+        <label>Title <input id="eTitle" class="field" maxlength="200" autocomplete="off"></label>
+        <div class="row2">
+          <label>Tags <input id="eTags" class="field" placeholder="for example: powershell, files" autocomplete="off" title="Separate tags with commas"></label>
+          <label>Language <input id="eLang" class="field" placeholder="for example: PowerShell" maxlength="40" autocomplete="off" list="langs"></label>
+        </div>
+        <datalist id="langs"></datalist>
+        <label class="grow">Text <textarea id="eBody" class="field body" spellcheck="false" wrap="off"></textarea></label>
+        <div class="acts"><span class="muted small" id="eState">Changes are saved as you type.</span><span class="grow"></span><button id="doneBtn" class="btn primary" title="Finish editing (Esc)">Done</button></div>
+      </div>
+      <div id="empty" class="empty">
+        <div>
+          <img src="icon.svg" alt="" width="64" height="64">
+          <h2 id="emptyTitle">No snippet chosen</h2>
+          <p id="emptyMsg">Pick one from the list, or press New.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="importDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="impTitle">
+    <h2 id="impTitle">Import snippets</h2>
+    <p id="impMsg"></p>
+    <div id="impWarn" class="warn" hidden></div>
+    <div class="dacts">
+      <button class="btn" data-act="cancel">Cancel</button>
+      <button id="impReplace" class="btn danger" data-act="replace">Replace my library</button>
+      <button class="btn primary" data-act="add">Add to my library</button>
+    </div>
+  </div>
+</div>
+
+<div id="copyDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="copyTitle">
+    <h2 id="copyTitle">Copy</h2>
+    <p>This window is not allowed to use the clipboard. The text is selected below: press Ctrl+C to copy it.</p>
+    <textarea id="copyText" readonly rows="8"></textarea>
+    <div class="dacts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+
+<div id="helpDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">Keyboard shortcuts</h2>
+    <table class="keys">
+      <tr><td>Ctrl+F</td><td>Search (Esc clears it)</td></tr>
+      <tr><td>Up / Down, Home / End</td><td>Move through the list</td></tr>
+      <tr><td>Enter (in the list), Ctrl+Enter</td><td>Copy the snippet's text</td></tr>
+      <tr><td>Alt+N</td><td>New snippet</td></tr>
+      <tr><td>F2</td><td>Edit; Esc or Done when finished</td></tr>
+      <tr><td>Ctrl+D</td><td>Duplicate</td></tr>
+      <tr><td>P (in the list)</td><td>Pin or unpin</td></tr>
+      <tr><td>Delete (in the list)</td><td>Delete: press it twice</td></tr>
+      <tr><td>F1</td><td>This list</td></tr>
+    </table>
+    <div class="dacts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

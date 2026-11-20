@@ -1,0 +1,14 @@
+{
+  "id": "snippets",
+  "name": "Snippets",
+  "version": "1.0.0",
+  "description": "A searchable library of text you reuse: scripts, queries, email replies. Copy with one click.",
+  "icon": "icon.svg",
+  "entry": "index.html",
+  "width": 900,
+  "height": 560,
+  "singleInstance": true,
+  "fileTypes": [
+    { "ext": ".json", "name": "Snippets library", "icon": "glyph:code" }
+  ]
+}

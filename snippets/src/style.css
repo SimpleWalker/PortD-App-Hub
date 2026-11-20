@@ -1,0 +1,84 @@
+/* Snippets */
+:root {
+  --bg: #ffffff; --panel: #f3f5f8; --text: #1d2330; --muted: #535c6c; --line: #d5dae2; --edge: #7b8495;
+  --accent: #2563c9; --onaccent: #ffffff; --sel: #d6e4fb; --hit: #ffe680; --danger: #b42318; --dangerbg: #fde8e8;
+  --warnbg: #fff4d6; --warnfg: #5c4300; --warnedge: #b58a00; --pin: #b07400;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #1a1e26; --panel: #232833; --text: #e6e9ef; --muted: #a9b1bf; --line: #353c4a; --edge: #7d8698;
+  --accent: #7aa7ff; --onaccent: #0b1220; --sel: #2c3f63; --hit: #6b5a12; --danger: #ff9b94; --dangerbg: #4a2a2e;
+  --warnbg: #3a3018; --warnfg: #ffe3a1; --warnedge: #b58a00; --pin: #ffc861;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 13px/1.4 "Segoe UI", system-ui, sans-serif; }
+#app { display: flex; flex-direction: column; height: 100%; }
+[hidden] { display: none !important; }
+.muted { color: var(--muted); } .small { font-size: 12px; }
+.grow { flex: 1; }
+
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 6px 8px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 2px; }
+.btn, .field { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--edge); border-radius: 6px; padding: 4px 10px; min-height: 28px; }
+.btn { cursor: pointer; }
+.btn:hover:not(:disabled) { background: var(--sel); }
+.btn:disabled { opacity: .55; cursor: default; }
+.btn.primary { background: var(--accent); color: var(--onaccent); border-color: var(--accent); }
+.btn.danger { color: var(--danger); border-color: var(--danger); }
+.btn.danger:hover:not(:disabled) { background: var(--dangerbg); }
+.btn.icon { min-width: 30px; padding: 4px 6px; display: inline-flex; align-items: center; justify-content: center; }
+.btn[aria-pressed="true"] { background: var(--sel); }
+@media (pointer: coarse) { .btn, .field { min-height: 40px; } }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.main { flex: 1; display: flex; min-height: 0; }
+.side { width: 310px; min-width: 220px; display: flex; flex-direction: column; border-right: 1px solid var(--line); background: var(--panel); }
+.filters { padding: 8px; display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid var(--line); }
+.row2 { display: flex; gap: 6px; }
+.row2 > * { flex: 1; min-width: 0; }
+.list { flex: 1; overflow: auto; outline-offset: -2px; }
+.item { padding: 7px 10px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.item:hover { background: color-mix(in srgb, var(--sel) 50%, transparent); }
+.item.on { background: var(--sel); box-shadow: inset 3px 0 0 var(--accent); }
+.item .t { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item .sub, .item .hit { font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+.item .hit { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--muted); }
+.item .pin { color: var(--pin); }
+.item mark { background: var(--hit); color: inherit; border-radius: 2px; }
+@media (pointer: coarse) { .item { padding: 11px 12px; } }
+.count { padding: 4px 10px; border-top: 1px solid var(--line); font-size: 12px; }
+
+.detail { flex: 1; min-width: 0; display: flex; }
+.view, .edit { flex: 1; display: flex; flex-direction: column; min-width: 0; padding: 12px 14px; gap: 10px; }
+.vhead h1 { font-size: 18px; margin: 0 0 4px; overflow-wrap: anywhere; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.meta .lang { font-size: 12px; padding: 1px 8px; border-radius: 10px; background: var(--accent); color: var(--onaccent); }
+.meta .tag { font: 12px "Segoe UI", system-ui, sans-serif; padding: 1px 8px; border-radius: 10px; background: var(--panel); color: var(--text); border: 1px solid var(--line); cursor: pointer; }
+.meta .tag:hover { border-color: var(--accent); }
+.acts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.body { font: 12.5px/1.5 ui-monospace, "Cascadia Mono", Consolas, monospace; tab-size: 4; }
+pre.body { flex: 1; margin: 0; overflow: auto; padding: 10px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.edit label { display: flex; flex-direction: column; gap: 3px; font-weight: 600; font-size: 12px; }
+.edit label .field { font-weight: 400; font-size: 13px; }
+.edit label.grow { flex: 1; min-height: 0; }
+.edit textarea.body { flex: 1; resize: none; min-height: 120px; padding: 8px 10px; }
+
+.empty { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+.empty h2 { font-size: 18px; margin: 8px 0 4px; }
+
+.ov { position: fixed; inset: 0; background: rgba(10, 14, 22, .45); display: flex; align-items: center; justify-content: center; z-index: 10; padding: 12px; }
+.dlg { background: var(--bg); color: var(--text); border: 1px solid var(--edge); border-radius: 10px; padding: 16px 18px; min-width: 280px; max-width: 520px; max-height: 100%; overflow: auto; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+.dlg h2 { margin: 0 0 10px; font-size: 16px; }
+.dlg textarea { width: 100%; font: 12px ui-monospace, Consolas, monospace; background: var(--panel); color: var(--text); border: 1px solid var(--edge); border-radius: 6px; padding: 6px; }
+.dacts { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.warn { padding: 6px 10px; background: var(--warnbg); color: var(--warnfg); border: 1px solid var(--warnedge); border-radius: 6px; }
+.keys { border-collapse: collapse; }
+.keys td { padding: 3px 8px 3px 0; vertical-align: top; }
+.keys td:first-child { white-space: nowrap; font-weight: 600; }
+
+.toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 7px 14px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 40; max-width: 90%; text-align: center; }
+.toast.show { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+@media (max-width: 620px) { .side { width: 44%; } }
+@media (forced-colors: active) { .item.on { outline: 2px solid Highlight; } .item mark { background: Mark; color: MarkText; } }
