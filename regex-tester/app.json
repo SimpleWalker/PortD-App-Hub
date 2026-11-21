@@ -1,0 +1,15 @@
+{
+  "id": "regex-tester",
+  "name": "Regex Tester",
+  "version": "1.0.0",
+  "description": "Try regular expressions on your own text: live highlighting, groups, replace, a cheat sheet and saved patterns.",
+  "icon": "icon.svg",
+  "entry": "index.html",
+  "width": 980,
+  "height": 640,
+  "singleInstance": false,
+  "fileTypes": [
+    { "ext": ".txt", "name": "Text file", "icon": "glyph:text" },
+    { "ext": ".log", "name": "Log file", "icon": "glyph:text" }
+  ]
+}

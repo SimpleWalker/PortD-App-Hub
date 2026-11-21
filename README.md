@@ -13,6 +13,7 @@ Each program is a single `.portdapp` file. Download it, install it in PortD, and
 | 📝 | [Markdown Editor](markdown-editor/) | Write Markdown with a live preview beside it, add pictures, and save it as a web page | `.md` `.markdown` | [markdown-editor-1.0.0.portdapp](markdown-editor/markdown-editor-1.0.0.portdapp) |
 | ⇆ | [Compare](compare/) | See what changed between two files or texts, line by line and word by word; save a standard diff | | [compare-1.0.0.portdapp](compare/compare-1.0.0.portdapp) |
 | ✂️ | [Snippets](snippets/) | A searchable library of text you reuse: scripts, queries, email replies; copy with one click | `.json` (its own exports) | [snippets-1.0.0.portdapp](snippets/snippets-1.0.0.portdapp) |
+| `.*` | [Regex Tester](regex-tester/) | Try a pattern on your own text: live highlighting, groups, replace, a cheat sheet and saved patterns | `.txt` `.log` | [regex-tester-1.0.0.portdapp](regex-tester/regex-tester-1.0.0.portdapp) |
 | 💣 | [Minesweeper](minesweeper/) | The classic, with three levels, custom boards, best times and keyboard play | | [minesweeper-1.0.0.portdapp](minesweeper/minesweeper-1.0.0.portdapp) |
 | 🔢 | [Sudoku](sudoku/) | Four difficulties, pencil notes, hints and undo; your game is saved as you play | | [sudoku-1.0.0.portdapp](sudoku/sudoku-1.0.0.portdapp) |
 | 🃏 | [Solitaire](solitaire/) | Klondike, draw 1 or 3, drag or tap, undo, scoring and statistics | | [solitaire-1.0.0.portdapp](solitaire/solitaire-1.0.0.portdapp) |

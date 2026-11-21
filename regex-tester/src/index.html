@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-app="regex-tester">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Regex Tester</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="Regex Tester">
+    <button id="openBtn" class="btn" title="Open a text or log file as the test text (Ctrl+O)">Open…</button>
+    <button id="saveBtn" class="btn" title="Save this pattern with a name (Ctrl+S)">Save pattern…</button>
+    <button id="savedBtn" class="btn" title="Your saved patterns (Alt+P)">Saved patterns…</button>
+    <span class="grow"></span>
+    <button id="liveBtn" class="btn" aria-pressed="true" title="Match as you type">Live</button>
+    <button id="runBtn" class="btn primary" title="Run the pattern now (Ctrl+Enter)">Run</button>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+  </div>
+
+  <div class="pat">
+    <label class="plabel" for="pattern">Pattern</label>
+    <div class="pbox">
+      <span class="slash" aria-hidden="true">/</span>
+      <input id="pattern" class="pin" spellcheck="false" autocomplete="off" aria-describedby="status" placeholder="for example: (?<year>\d{4})-(\d\d)">
+      <span class="slash" aria-hidden="true">/</span>
+      <span id="flagText" class="ftext" aria-hidden="true"></span>
+    </div>
+    <div class="flags" role="group" aria-label="Flags">
+      <button class="flag" data-f="g" aria-pressed="true" title="g: find all matches, not just the first">g</button>
+      <button class="flag" data-f="i" aria-pressed="false" title="i: ignore upper and lower case">i</button>
+      <button class="flag" data-f="m" aria-pressed="false" title="m: ^ and $ match at the start and end of each line">m</button>
+      <button class="flag" data-f="s" aria-pressed="false" title="s: . also matches line breaks">s</button>
+      <button class="flag" data-f="u" aria-pressed="false" title="u: Unicode, for \u{…} and \p{…}">u</button>
+      <button class="flag" data-f="y" aria-pressed="false" title="y: sticky, each match must start where the last one ended">y</button>
+    </div>
+  </div>
+  <div id="status" class="status" role="status"></div>
+
+  <div class="main">
+    <section class="left" aria-label="Test text">
+      <div class="lhead"><span class="ltitle">Test text</span><span id="textInfo" class="muted small"></span></div>
+      <div class="tbox">
+        <div id="hl" class="hl" aria-hidden="true"></div>
+        <textarea id="text" class="ta" spellcheck="false" wrap="off" aria-label="Test text" placeholder="Type or paste the text to test, or press Open…"></textarea>
+      </div>
+    </section>
+    <section class="right">
+      <div class="tabs" role="tablist" aria-label="Panels">
+        <button id="tab-matches" class="tab on" role="tab" aria-selected="true" aria-controls="p-matches" title="Matches (Alt+1)">Matches <span id="mCount" class="pill"></span></button>
+        <button id="tab-replace" class="tab" role="tab" aria-selected="false" aria-controls="p-replace" tabindex="-1" title="Replace (Alt+2)">Replace</button>
+        <button id="tab-cheat" class="tab" role="tab" aria-selected="false" aria-controls="p-cheat" tabindex="-1" title="Cheat sheet (Alt+3 or F1)">Cheat sheet</button>
+      </div>
+      <div id="p-matches" class="panel" role="tabpanel" aria-labelledby="tab-matches">
+        <div id="mList" class="mlist" role="listbox" aria-label="Matches" tabindex="0"></div>
+      </div>
+      <div id="p-replace" class="panel" role="tabpanel" aria-labelledby="tab-replace" hidden>
+        <label class="rl">Replace with <input id="repl" class="field mono" spellcheck="false" autocomplete="off" placeholder="for example: $<year>/$2" title="$1 group 1, $<name> a named group, $&amp; the whole match, $$ a dollar sign"></label>
+        <div class="rhead"><span class="muted small" id="rInfo"></span><span class="grow"></span><button id="copyBtn" class="btn" title="Copy the result">Copy result</button></div>
+        <pre id="rOut" class="rout mono" tabindex="0" aria-label="Result"></pre>
+      </div>
+      <div id="p-cheat" class="panel cheat" role="tabpanel" aria-labelledby="tab-cheat" hidden tabindex="0">
+        <table>
+          <tr><th colspan="2">Characters</th></tr>
+          <tr><td>.</td><td>any character except a line break (any at all with the s flag)</td></tr>
+          <tr><td>\d \w \s</td><td>a digit · a letter, digit or _ · a space, tab or line break</td></tr>
+          <tr><td>\D \W \S</td><td>anything except those</td></tr>
+          <tr><td>[abc] [^abc] [a-z]</td><td>one of a, b, c · anything but a, b, c · a to z</td></tr>
+          <tr><td>\. \\ \( \[</td><td>a real dot, backslash, bracket: put \ before . * + ? ( ) [ ] { } | ^ $ \</td></tr>
+          <tr><td>\t \n \r</td><td>tab · new line · carriage return</td></tr>
+          <tr><td>\p{L} \p{Lu}</td><td>any letter · an upper-case letter (needs the u flag)</td></tr>
+          <tr><th colspan="2">How many</th></tr>
+          <tr><td>* + ?</td><td>0 or more · 1 or more · 0 or 1</td></tr>
+          <tr><td>{3} {2,} {2,5}</td><td>exactly 3 · 2 or more · 2 to 5</td></tr>
+          <tr><td>*? +? ??</td><td>as few as possible (lazy)</td></tr>
+          <tr><th colspan="2">Where</th></tr>
+          <tr><td>^ $</td><td>start · end of the text (of each line with the m flag)</td></tr>
+          <tr><td>\b \B</td><td>a word edge · not a word edge</td></tr>
+          <tr><td>(?=x) (?!x)</td><td>followed by x · not followed by x</td></tr>
+          <tr><td>(?&lt;=x) (?&lt;!x)</td><td>after x · not after x</td></tr>
+          <tr><th colspan="2">Groups</th></tr>
+          <tr><td>(abc)</td><td>a group: kept as $1, $2…</td></tr>
+          <tr><td>(?&lt;name&gt;abc)</td><td>a named group: kept as $&lt;name&gt;</td></tr>
+          <tr><td>(?:abc)</td><td>a group that is not kept</td></tr>
+          <tr><td>a|b</td><td>a or b</td></tr>
+          <tr><td>\1 \k&lt;name&gt;</td><td>the same text as group 1 · as the named group</td></tr>
+          <tr><th colspan="2">In Replace</th></tr>
+          <tr><td>$1 $&lt;name&gt;</td><td>a group's text</td></tr>
+          <tr><td>$&amp;</td><td>the whole match</td></tr>
+          <tr><td>$` $'</td><td>the text before · after the match</td></tr>
+          <tr><td>$$</td><td>a dollar sign</td></tr>
+          <tr><th colspan="2">Examples</th></tr>
+          <tr><td>^\s*$</td><td>an empty line (with m)</td></tr>
+          <tr><td>\b\d{1,3}(\.\d{1,3}){3}\b</td><td>something shaped like an IPv4 address</td></tr>
+          <tr><td>(?&lt;user&gt;[\w.-]+)@(?&lt;domain&gt;[\w-]+(\.[\w-]+)+)</td><td>something shaped like an email address</td></tr>
+          <tr><td>\[(ERROR|WARN)\]</td><td>[ERROR] or [WARN] in a log</td></tr>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="saveDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="saveTitle">
+    <h2 id="saveTitle">Save pattern</h2>
+    <p class="small muted">Saves the pattern, its flags, the replacement and the test text (up to 100,000 characters).</p>
+    <label class="rl">Name <input id="saveName" class="field" maxlength="80" autocomplete="off"></label>
+    <div id="saveWarn" class="warn" hidden></div>
+    <div class="dacts"><button class="btn" data-act="cancel">Cancel</button><button id="saveOk" class="btn primary">Save</button></div>
+  </div>
+</div>
+
+<div id="savedDlg" class="ov" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="savedTitle">
+    <h2 id="savedTitle">Saved patterns</h2>
+    <div id="savedList" class="slist"></div>
+    <div class="dacts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+
+<div id="copyDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="copyTitle">
+    <h2 id="copyTitle">Copy</h2>
+    <p>This window is not allowed to use the clipboard. The text is selected below: press Ctrl+C to copy it.</p>
+    <textarea id="copyText" readonly rows="8"></textarea>
+    <div class="dacts"><button class="btn primary" data-act="cancel">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
