@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-app="subnet-calculator">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subnet Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <div id="tabs" class="tabs" role="tablist" aria-label="Tools"></div>
+    <span class="grow"></span>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+  </div>
+  <div id="panels" class="panels"></div>
+  <div class="foot muted">Alt+1 to Alt+5 switch tools · Alt+C copies the result</div>
+</div>
+<div id="copyDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="copyTitle">
+    <h2 id="copyTitle">Copy</h2>
+    <p>This window is not allowed to use the clipboard. The text is selected below: press Ctrl+C to copy it.</p>
+    <textarea id="copyText" readonly rows="8"></textarea>
+    <div class="dacts"><button class="btn primary" data-act="close">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+<script src="js/host.js"></script>
+<script src="js/ip.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

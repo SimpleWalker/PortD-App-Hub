@@ -1,0 +1,72 @@
+Subnet Calculator tests
+  package  subnet-calculator-1.0.0.portdapp
+  portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names Subnet Calculator 1.0.0 and 6 files
+  ok    installed, with a desktop shortcut
+  ok    it opens on IPv4 with an example and the cursor in the address box
+
+IPv4
+  ok    10.1.2.3/22: network, broadcast, first and last host, usable hosts
+  ok    …masks, class, type and the number
+  ok    it says where the address sits
+  ok    the binary view highlights exactly 22 network bits in each row and reads out the bits
+  ok    the mask can be typed after a space
+  ok    …or after a slash
+  ok    mistakes get plain messages: too big, leading zero, wildcard mask, gappy mask, prefix too long, too few numbers
+  ok    an address with no prefix is a single address (/32), and it says so
+  ok    /31 has 2 usable addresses (point-to-point) and no broadcast
+  ok    types: public, carrier-grade NAT, link-local, documentation, multicast, loopback
+  ok    Alt+C copies all the details as text
+
+Split
+  ok    Alt+2 opens Split with the cursor in the network box
+  ok    6 subnets of 10.20.0.0/22 become 8 of /25, and it explains why
+  ok    by new prefix /26: 16 subnets of 62 hosts
+  ok    Copy as text gives one CIDR per line
+  ok    Copy as table gives tab-separated rows with headings, for Excel
+  ok    a prefix shorter than the network's is explained
+  ok    65,536 subnets: the first 1,024 are listed, and it says Copy gives all
+  ok    …and Copy does give all 65,536
+  ok    more than 65,536 is refused, plainly
+  ok    a host address is taken as its network, and it says so
+
+In range?
+  ok    for 7 addresses, every yes/no agrees with Node's net.BlockList (CIDR, mask, start–end range, single address)
+  ok    a line that cannot be read is listed with the reason
+  ok    the summary counts the ranges it is in
+  ok    Copy gives a plain list
+
+Summarise
+  ok    neighbours and overlaps merge into the fewest blocks; an odd range becomes exact blocks
+  ok    it counts in and out, and says what it did with a host address and a bad line
+  ok    two halves become the whole
+
+IPv6
+  ok    compress (lower case, longest zero run as ::) and expand
+  ok    prefix range: network, first and last address, how many, type
+  ok    the prefix part is highlighted (12 hex digits for /48)
+  ok    the longest run of zeros is the one compressed
+  ok    a zone (%…) is explained and set aside
+  ok    an IPv4-mapped address keeps its IPv4 form
+  ok    small ranges are counted exactly
+  ok    IPv6 mistakes get plain messages
+
+Keyboard, touch, theme and coming back later
+  ok    arrow keys move along the tabs
+  ok    touch works on tabs and buttons
+  ok    the theme button goes to light, then dark
+  ok    settings.json keeps each tool's last input, the tab and the theme
+  ok    after a PortD reload: the same tab, inputs and results, still dark
+
+No errors
+  ok    no console errors in PortD or in Subnet Calculator
+
+Outside PortD: the page opened straight from its folder
+  ok    it works and follows the system's dark theme
+  ok    the inputs are kept in the browser's storage
+  ok    no console errors outside PortD
+
+48 checks: 48 passed, 0 failed

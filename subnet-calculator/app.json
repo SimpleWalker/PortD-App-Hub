@@ -1,0 +1,12 @@
+{
+  "id": "subnet-calculator",
+  "name": "Subnet Calculator",
+  "version": "1.0.0",
+  "description": "IPv4 and IPv6 subnets: network, hosts, masks and binary, splitting, range checks and summarising.",
+  "icon": "icon.svg",
+  "entry": "index.html",
+  "width": 940,
+  "height": 640,
+  "singleInstance": false,
+  "fileTypes": []
+}
