@@ -1,0 +1,17 @@
+{
+  "id": "paint",
+  "name": "Paint",
+  "version": "1.0.0",
+  "description": "A simple sketchpad: pencil, shapes, fill, eraser and colours, with undo, zoom, and PNG or JPG files.",
+  "icon": "icon.svg",
+  "entry": "index.html",
+  "width": 1000,
+  "height": 680,
+  "singleInstance": true,
+  "fileTypes": [
+    { "ext": ".png", "name": "PNG picture", "icon": "glyph:image" },
+    { "ext": ".jpg", "name": "JPEG picture", "icon": "glyph:image" },
+    { "ext": ".jpeg", "name": "JPEG picture", "icon": "glyph:image" },
+    { "ext": ".gif", "name": "GIF picture", "icon": "glyph:image" }
+  ]
+}

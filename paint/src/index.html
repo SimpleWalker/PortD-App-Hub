@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-app="paint">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paint</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="Picture">
+    <button id="newBtn" class="btn" title="New picture (Alt+N)">New…</button>
+    <button id="openBtn" class="btn" title="Open a PNG, JPG or GIF (Ctrl+O)">Open…</button>
+    <button id="saveBtn" class="btn primary" title="Save (Ctrl+S)">Save</button>
+    <button id="saveAsBtn" class="btn" title="Save as PNG or JPG (Ctrl+Shift+S)">Save as…</button>
+    <span class="sep"></span>
+    <button id="undoBtn" class="btn icon" title="Undo (Ctrl+Z)" aria-label="Undo" disabled>↶</button>
+    <button id="redoBtn" class="btn icon" title="Redo (Ctrl+Y)" aria-label="Redo" disabled>↷</button>
+    <button id="clearBtn" class="btn" title="Clear the whole picture">Clear…</button>
+    <span class="sep"></span>
+    <button id="zoomOut" class="btn icon" title="Zoom out (−)" aria-label="Zoom out">−</button>
+    <select id="zoomSel" class="field" aria-label="Zoom"></select>
+    <button id="zoomIn" class="btn icon" title="Zoom in (+)" aria-label="Zoom in">+</button>
+    <button id="fitBtn" class="btn" title="Fit the window (0)">Fit</button>
+    <span class="grow"></span>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+    <button id="helpBtn" class="btn icon" title="Keys (F1)" aria-label="Help">?</button>
+  </div>
+  <div class="main">
+    <div class="rail">
+      <div id="tools" class="tools" role="radiogroup" aria-label="Tools"></div>
+      <label class="small lbl" for="size">Size <output id="sizeOut">4</output></label>
+      <input id="size" type="range" min="1" max="64" value="4" aria-label="Brush size">
+      <label class="chk small" title="Fill rectangles and ellipses instead of drawing their outline"><input id="filled" type="checkbox"> Filled</label>
+    </div>
+    <div id="stage" class="stage">
+      <div id="wrap" class="wrap">
+        <canvas id="cv" width="800" height="600"></canvas>
+        <canvas id="ov" width="800" height="600" tabindex="0" role="application" aria-label="Drawing area. Arrow keys move a cursor, Shift plus arrows move it faster, Enter puts the pen down and lifts it, Escape cancels."></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="colors">
+      <button id="c1" class="cur c1" title="Colour for the left button (click to choose)" aria-label="Main colour"></button>
+      <button id="c2" class="cur c2" title="Colour for the right button (click to choose)" aria-label="Second colour"></button>
+      <button id="swapBtn" class="btn icon small" title="Swap the two colours (X)" aria-label="Swap colours">⇄</button>
+      <input id="picker" type="color" class="hiddenpick" tabindex="-1" aria-hidden="true">
+      <div id="palette" class="palette" role="group" aria-label="Palette: Enter for the main colour, Shift+Enter for the second"></div>
+    </div>
+    <span class="grow"></span>
+    <span id="pos" class="muted small" aria-hidden="true"></span>
+    <span id="dims" class="muted small"></span>
+    <span id="docName" class="small"></span>
+  </div>
+</div>
+<div id="say" class="sr" aria-live="polite"></div>
+
+<div id="newDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="newTitle">
+    <h2 id="newTitle">New picture</h2>
+    <label class="lbl">Size <select id="newPreset" class="field">
+      <option value="800x600">800 × 600</option><option value="1024x768">1024 × 768</option><option value="1280x720">1280 × 720 (HD)</option>
+      <option value="1920x1080">1920 × 1080 (Full HD)</option><option value="1080x1080">1080 × 1080 (square)</option><option value="595x842">595 × 842 (A4 at 72 dpi)</option><option value="custom">Custom…</option>
+    </select></label>
+    <div class="row"><label class="lbl">Width <input id="newW" class="field num" type="number" min="1" max="8192" value="800"></label><label class="lbl">Height <input id="newH" class="field num" type="number" min="1" max="8192" value="600"></label></div>
+    <div class="row" role="radiogroup" aria-label="Background">
+      <label class="chk"><input type="radio" name="bg" value="white" checked> White background</label>
+      <label class="chk"><input type="radio" name="bg" value="transparent"> Transparent</label>
+    </div>
+    <p id="newWarn" class="warn" hidden></p>
+    <div class="dacts"><button class="btn" data-act="cancel">Cancel</button><button id="newOk" class="btn primary" data-act="ok">Make it</button></div>
+  </div>
+</div>
+
+<div id="fmtDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="fmtTitle">
+    <h2 id="fmtTitle">Save as</h2>
+    <div class="choices">
+      <button class="choice" data-act="png"><b>PNG</b><span>Exact, keeps transparency. Best for drawings and screenshots.</span></button>
+      <button class="choice" data-act="jpg"><b>JPG</b><span>Smaller for photos. No transparency: see-through parts become white.</span></button>
+    </div>
+    <div class="dacts"><button class="btn" data-act="cancel">Cancel</button></div>
+  </div>
+</div>
+
+<div id="confirmDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="confTitle" aria-describedby="confMsg">
+    <h2 id="confTitle"></h2>
+    <p id="confMsg"></p>
+    <div class="dacts"><button class="btn" data-act="cancel">Cancel</button><button id="confOk" class="btn danger" data-act="ok">OK</button></div>
+  </div>
+</div>
+
+<div id="restoreDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="resTitle" aria-describedby="resMsg">
+    <h2 id="resTitle">Unsaved picture</h2>
+    <p id="resMsg"></p>
+    <img id="resImg" class="thumb" alt="The unsaved picture">
+    <div class="dacts"><button id="resDiscard" class="btn danger">Throw it away</button><button class="btn primary" data-act="restore">Restore it</button></div>
+  </div>
+</div>
+
+<div id="helpDlg" class="ov" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">Keys</h2>
+    <table class="keys">
+      <tr><td>B, L, R, O, F, E, I, H</td><td>Pencil, Line, Rectangle, Ellipse, Fill, Eraser, Eyedropper, Hand</td></tr>
+      <tr><td>[ and ]</td><td>Smaller or bigger brush</td></tr>
+      <tr><td>X</td><td>Swap the two colours</td></tr>
+      <tr><td>Ctrl+Z, Ctrl+Y (or Ctrl+Shift+Z)</td><td>Undo, redo</td></tr>
+      <tr><td>+ and −, 0, 1</td><td>Zoom in and out, fit the window, 100%</td></tr>
+      <tr><td>Ctrl+O, Ctrl+S, Ctrl+Shift+S, Alt+N</td><td>Open, save, save as, new</td></tr>
+      <tr><td>Space + drag, middle button</td><td>Move around the picture (or use the Hand)</td></tr>
+      <tr><td>Shift while drawing</td><td>Straight lines at 45°, squares and circles</td></tr>
+      <tr><td>Right button</td><td>Draw with the second colour</td></tr>
+      <tr><th colspan="2">Drawing from the keyboard (Tab to the picture first)</th></tr>
+      <tr><td>Arrow keys (Shift: 10 at a time)</td><td>Move the cursor</td></tr>
+      <tr><td>Enter</td><td>Put the pen down; Enter again lifts it (pencil, eraser) or finishes the line or shape. Fill and Eyedropper act at once.</td></tr>
+      <tr><td>Esc</td><td>Cancel a line or shape in progress</td></tr>
+    </table>
+    <div class="dacts"><button class="btn primary" data-act="close">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/paint.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
