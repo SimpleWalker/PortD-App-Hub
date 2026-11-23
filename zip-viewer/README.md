@@ -94,7 +94,7 @@ You can also open `src/index.html` straight in Edge or Chrome. **Open…** then 
 
 ## Known limits
 
-- **No "extract to a folder of your choice".** PortD lets a program write only to its own folder, or to the single file you pick in a Save dialog; it has no folder picker. So several files go either all at once into Zip Viewer's folder, or one by one through Save dialogs.
+- **No "extract to a folder of your choice".** PortD lets a program write only to its own folder, or to the single file you pick in a Save dialog; it has no folder picker. So several files go either all at once into Zip Viewer's folder, or one by one through Save dialogs. If a later version of PortD adds a way to choose a folder, Zip Viewer can be updated to use it.
 - **Only stored and deflate compression**, which almost every zip uses. Password-protected entries and other methods (BZIP2, LZMA, Deflate64, Zstandard, XZ, AES) can't be opened.
 - **Whole archives only.** Split archives (`.z01`, `.z02`…) can't be read.
 - **Sizes:**

@@ -118,6 +118,41 @@ Use `src/js/host.js` (`window.Host`) rather than `PortD` directly. It does the s
 
 If you change `host.js`, edit `build/lib/host.js` and copy it into every `src/js/`.
 
+## Known PortD 1.0 limits (may change in a later PortD)
+
+These were found while building the apps here, by reading and testing PortD 1.0.0. A later PortD may lift some of them. When it does, update this list, the affected app READMEs (their "Known limits" sections), and the apps.
+
+**Files and folders**
+
+- A program can write only:
+  - inside its own data folder (`P:\User\Config\<id>\`, subfolders allowed and created as needed)
+  - to the single file the user picks in `PortD.ui.saveFile`
+
+  The grant is for that one path, not its folder.
+- **There is no folder picker** (`PortD.ui` has `openFile` and `saveFile` only). A program can't save several files into a folder the user chooses: Zip Viewer saves them one by one through Save dialogs, or all at once into its own folder.
+- **A program can read only:**
+  - its data folder
+  - its own program folder
+  - files the user has given it: picked in `openFile`, or opened with it from Files
+- **Files must be in the home folder** (`P:\User\…`) to be opened with a program from Files.
+- **A program can't open a Files window or show the user a location.** Tell the user the path in words (with a Copy button).
+- **A file can be at most 64 MB.** Writes use `PortD.fs.write(path, text)` for text, or `PortD.fs.write(path, dataURL, 'dataurl')` for binary data.
+- **PortD keeps some extensions as text.** For these, `read` returns a string, not a data URL; everything else from the computer is binary:
+  - `txt md log json js mjs css html htm xml svg csv tsv`
+  - `ini cfg conf yml yaml ps1 psm1 psd1 bat cmd sh py tf toml sql`
+
+  To compare or hash a text file, use its UTF-8 bytes.
+- **File names** can't contain `\ / : * ? " < > |`, start with a space, end with a space or dot, or be longer than 120 characters.
+- **A program's `name` is also its desktop shortcut's file name**, so it can't contain those characters either: PortD turns `/` into `_` ("Encoder _ Decoder").
+
+**Windows, focus and running code**
+
+- **A nested `<iframe>` inside a program runs on the same thread as PortD.** Long-running code, such as a runaway regular expression, freezes all of PortD and can't be stopped from inside. There are no workers, so guard against it beforehand (Regex Tester).
+- **After a PortD dialog (Open, Save) closes, the keyboard stays with PortD.** The browser's own undo doesn't see text a program replaced during that time, so keep your own undo if it matters (Regex Tester).
+- **A program can't stop its window from closing.** Save as you go.
+- **PortD's "can open these file types" notice** stays until the user presses a button on it, and can cover a program's top-right corner.
+- **`navigator.clipboard` is blocked** by the permissions policy. `Host.copy` uses `document.execCommand('copy')`.
+
 ## Building
 
 ```
