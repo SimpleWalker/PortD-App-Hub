@@ -30,6 +30,7 @@ build/
   build.js           packs this app: node <app-id>/build.js
   test.js            this app's tests: node <app-id>/test.js
   test-results.txt   output of the last full test run
+  (others)           test helpers an app needs, such as zip-viewer/make-fixtures.py (Python, standard library only)
   <id>-<version>.portdapp   the built package, committed so users can download it
 ```
 

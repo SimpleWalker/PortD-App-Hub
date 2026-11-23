@@ -1,0 +1,89 @@
+Zip Viewer tests
+  package  zip-viewer-1.0.0.portdapp
+  portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names Zip Viewer 1.0.0, the five file types and 6 files
+  ok    installed, with a desktop shortcut
+
+Opening an archive and browsing it
+  ok    Open with lists Zip Viewer for .zip, and it opens the archive in its own window
+  ok    the summary: 7 files in 4 folders, sizes, and the archive's comment
+  ok    the tree: folders first (A to Z), then files; small archives open their first level
+  ok    each row has its size, packed size and date; folders add up their files
+  ok    the tree has the keyboard and the first row is chosen
+
+Keyboard in the tree
+  ok    ↓ moves down the rows
+  ok    → goes into a folder, and opens a closed one
+  ok    ← closes an open folder
+  ok    ← again goes to the folder above
+  ok    Space ticks a folder: every file in it is ticked, and the button counts them
+  ok    …unticking one inside leaves the folder partly ticked
+  ok    Ctrl+A ticks every file
+  ok    …and again ticks none
+
+Details and previews
+  ok    a text file shows its details and its text
+  ok    the checksum is checked
+  ok    a picture is shown (120 × 80)
+  ok    a binary file shows its first bytes in hex instead
+  ok    a folder shows how many files and how big
+  ok    Ctrl+F searches names across all folders, with the match marked
+  ok    Esc clears the search
+
+Saving one file
+  ok    Ctrl+S opens PortD's Save dialog with the file's name
+  ok    a text file is saved as text, exactly
+  ok    double-clicking a file saves it too; a picture is saved byte for byte
+  ok    …and so is a binary file
+
+Extracting several files
+  ok    Extract ticked explains the two ways, since PortD has no folder picker
+  ok    One by one: a Save dialog for the first…
+  ok    …then for the second
+  ok    both are saved
+  ok    Extract all, all at once: a summary with the folder path
+  ok    every file is there, in its folders, byte for byte
+  ok    text files are written as text (Notepad can open them), the rest as binary
+  ok    Copy the folder path copies it
+  ok    extracting again never overwrites: it goes into "normal (2)"
+
+Unsafe names stay inside the folder
+  ok    the summary warns that names tried to reach outside, and were made safe
+  ok    the entry says what it tried and where it will go instead
+  ok    extracting keeps every file under Extracted\unsafe, and says which names were changed
+  ok    nothing was written outside it
+
+What Zip Viewer cannot open, said plainly
+  ok    BZIP2 and LZMA entries are marked, and say why
+  ok    extracting all extracts what it can and lists the rest
+  ok    an encrypted entry says it needs a password
+  ok    a "zip bomb" (an entry that grows past the size it claims) is stopped and explained, before any Save dialog
+  ok    an entry over 64 MB is refused with the reason
+  ok    damaged compressed data says so
+  ok    a cut-off archive says it cannot be read, and why
+  ok    a .zip that is really text is refused plainly
+
+ZIP64 and Office files
+  ok    a ZIP64 archive is read (sizes and offsets from its ZIP64 fields)
+  ok    Open with lists Zip Viewer for .docx; its parts are listed
+  ok    …and the XML inside can be read
+
+Opening with Ctrl+O, touch, theme
+  ok    started on its own, it invites you to open an archive
+  ok    Ctrl+O opens an archive through PortD's Open dialog
+  ok    touch: a tap on the box ticks, a tap on the row chooses
+  ok    the theme button goes to light, then dark, and is saved
+  ok    the archive itself was never changed
+
+No errors
+  ok    no console errors in PortD or in Zip Viewer
+
+Outside PortD: the page opened straight from its folder
+  ok    it opens an archive from the computer and follows the system's dark theme
+  ok    Save file downloads it
+  ok    no console errors outside PortD
+
+59 checks: 59 passed, 0 failed

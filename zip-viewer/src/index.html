@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-app="zip-viewer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zip Viewer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="Zip Viewer">
+    <button id="openBtn" class="btn" title="Open a zip archive (Ctrl+O)">Open…</button>
+    <span class="sep"></span>
+    <button id="saveBtn" class="btn primary" title="Save the chosen file with the Save dialog (Ctrl+S)" disabled>Save file…</button>
+    <button id="extractBtn" class="btn" title="Extract the ticked files" disabled>Extract ticked…</button>
+    <button id="allBtn" class="btn" title="Extract every file" disabled>Extract all…</button>
+    <span class="grow"></span>
+    <input id="search" class="field" type="search" placeholder="Search names" aria-label="Search file names" title="Search the names in the archive (Ctrl+F)" autocomplete="off" disabled>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+  </div>
+  <div id="info" class="info" role="status"></div>
+  <div class="main">
+    <section class="left" aria-label="Contents">
+      <div class="thead" aria-hidden="true"><span></span><span class="c-name">Name</span><span class="c-size">Size</span><span class="c-pack">Packed</span><span class="c-date">Modified</span></div>
+      <div id="tree" class="tree" role="tree" aria-label="Contents of the archive" aria-multiselectable="false" tabindex="0"></div>
+    </section>
+    <section id="side" class="side" aria-label="Details and preview">
+      <div id="empty" class="empty">
+        <div>
+          <img src="icon.svg" alt="" width="72" height="72">
+          <h1>Zip Viewer</h1>
+          <p>Open a .zip file, or a .docx, .xlsx, .pptx or .jar (they are zip files too), to see what is inside.</p>
+          <button id="openBtn2" class="btn primary">Open…</button>
+        </div>
+      </div>
+      <div id="details" hidden></div>
+    </section>
+  </div>
+</div>
+
+<div id="exDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="exTitle" aria-describedby="exMsg">
+    <h2 id="exTitle">Extract</h2>
+    <p id="exMsg"></p>
+    <div class="choices">
+      <button id="exAll" class="choice" data-act="folder"><b>All at once</b><span id="exAllMsg"></span></button>
+      <button id="exOne" class="choice" data-act="one"><b>One by one</b><span>A Save dialog for each file, so you choose where each one goes.</span></button>
+    </div>
+    <div class="dacts"><button class="btn" data-act="cancel">Cancel</button></div>
+  </div>
+</div>
+
+<div id="progDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="progTitle">
+    <h2 id="progTitle">Extracting</h2>
+    <progress id="progBar" max="1" value="0"></progress>
+    <p id="progMsg" aria-live="polite"></p>
+    <div class="dacts"><button id="progStop" class="btn" data-act="stop">Stop</button></div>
+  </div>
+</div>
+
+<div id="doneDlg" class="ov" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="doneTitle">
+    <h2 id="doneTitle">Done</h2>
+    <p id="doneMsg"></p>
+    <div id="donePath" class="pathbox mono" tabindex="0"></div>
+    <ul id="doneList" class="problems"></ul>
+    <div class="dacts"><button id="doneCopy" class="btn">Copy the folder path</button><button class="btn primary" data-act="close">OK</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/zip.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
