@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-app="kanban-board">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kanban Board</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar" role="toolbar" aria-label="Board">
+    <select id="boardSel" class="field" aria-label="Board" title="Choose a board"></select>
+    <button id="boardMenuBtn" class="btn" aria-haspopup="menu" aria-expanded="false" title="New, rename, export, import or delete boards">Board ▾</button>
+    <button id="addColBtn" class="btn" title="Add a column">+ Column</button>
+    <button id="archBtn" class="btn" title="Archived cards: restore or delete them (Alt+A)">Archive</button>
+    <span class="sep"></span>
+    <input id="search" class="field" type="search" placeholder="Search cards" aria-label="Search cards" title="Search titles, notes and checklists (Ctrl+F)" autocomplete="off">
+    <select id="labelSel" class="field" aria-label="Show label"><option value="">All labels</option></select>
+    <select id="dueSel" class="field" aria-label="Show due dates">
+      <option value="">Any date</option><option value="overdue">Overdue</option><option value="today">Due today</option><option value="week">Due within a week</option><option value="none">No due date</option>
+    </select>
+    <span class="grow"></span>
+    <button id="themeBtn" class="btn icon" aria-label="Theme"></button>
+    <button id="helpBtn" class="btn icon" aria-label="Help" title="Keyboard shortcuts (F1)">?</button>
+  </div>
+  <div id="filterNote" class="fnote" hidden></div>
+  <div id="board" class="board" aria-label="Columns"></div>
+</div>
+
+<div id="menu" class="menu" role="menu" hidden></div>
+<div id="dropLine" class="dropline" hidden></div>
+<div id="say" class="sr" aria-live="polite"></div>
+
+<div id="cardDlg" class="ov" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="cTitleLbl">
+    <label id="cTitleLbl" class="lbl">Title <input id="cTitle" class="field big" maxlength="300" autocomplete="off"></label>
+    <div class="row">
+      <div role="radiogroup" aria-label="Colour label" id="cLabels" class="swatches"></div>
+      <label class="lbl inline">Due <input id="cDue" class="field" type="date"></label>
+      <button id="cDueClear" class="btn small" title="Remove the due date">No date</button>
+      <span id="cDueNote" class="chip"></span>
+    </div>
+    <label class="lbl">Notes <textarea id="cNotes" class="field ta" rows="5"></textarea></label>
+    <div class="lbl">Checklist <span id="cProg" class="muted"></span></div>
+    <ul id="cList" class="clist"></ul>
+    <div class="row"><input id="cNewItem" class="field grow" placeholder="Add an item and press Enter" aria-label="New checklist item" autocomplete="off"><button id="cAddItem" class="btn">Add</button></div>
+    <div class="dacts">
+      <label class="lbl inline">Move to <select id="cMove" class="field"></select></label>
+      <button id="cArchive" class="btn" title="Put it in the archive (it can be restored)">Archive</button>
+      <span class="grow"></span>
+      <span class="muted small">Saved as you type</span>
+      <button class="btn primary" data-act="close">Done</button>
+    </div>
+  </div>
+</div>
+
+<div id="nameDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="nameTitle">
+    <h2 id="nameTitle"></h2>
+    <input id="nameIn" class="field big" maxlength="80" autocomplete="off" aria-labelledby="nameTitle">
+    <div class="dacts"><button class="btn" data-act="cancel">Cancel</button><button id="nameOk" class="btn primary" data-act="ok">OK</button></div>
+  </div>
+</div>
+
+<div id="confirmDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="confTitle" aria-describedby="confMsg">
+    <h2 id="confTitle"></h2>
+    <p id="confMsg"></p>
+    <div class="dacts"><button class="btn" data-act="cancel">Cancel</button><button id="confOk" class="btn danger" data-act="ok">OK</button></div>
+  </div>
+</div>
+
+<div id="archDlg" class="ov" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true" aria-labelledby="archTitle">
+    <h2 id="archTitle">Archived cards</h2>
+    <div id="archList" class="alist"></div>
+    <div class="dacts"><button class="btn primary" data-act="close">Close</button></div>
+  </div>
+</div>
+
+<div id="helpDlg" class="ov" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">Keyboard shortcuts</h2>
+    <table class="keys">
+      <tr><td>Tab</td><td>Move between columns, cards and buttons</td></tr>
+      <tr><td>↑ ↓ ← →</td><td>Go to the next card up, down, or in the next column</td></tr>
+      <tr><td>Ctrl+↑ Ctrl+↓</td><td>Move the card up or down in its column</td></tr>
+      <tr><td>Ctrl+← Ctrl+→</td><td>Move the card to the next column</td></tr>
+      <tr><td>Enter or Space</td><td>Open the card</td></tr>
+      <tr><td>M or Shift+F10</td><td>Card menu: Move to, top, bottom, archive</td></tr>
+      <tr><td>Delete</td><td>Archive the card (restore it from Archive)</td></tr>
+      <tr><td>Alt+N</td><td>New card (in the column you are in)</td></tr>
+      <tr><td>Ctrl+F</td><td>Search</td></tr>
+      <tr><td>Alt+A</td><td>Archived cards</td></tr>
+      <tr><td>Esc</td><td>Close a dialog or menu, or stop a drag</td></tr>
+    </table>
+    <div class="dacts"><button class="btn primary" data-act="close">Close</button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="js/host.js"></script>
+<script src="js/model.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

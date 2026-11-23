@@ -16,6 +16,7 @@ Each program is a single `.portdapp` file. Download it, install it in PortD, and
 | `.*` | [Regex Tester](regex-tester/) | Try a pattern on your own text: live highlighting, groups, replace, a cheat sheet and saved patterns | `.txt` `.log` | [regex-tester-1.0.0.portdapp](regex-tester/regex-tester-1.0.0.portdapp) |
 | 🔐 | [Encoder-Decoder](encoder-decoder/) | Base64, URL, hex and HTML entities both ways, a JWT reader, hashes, GUIDs, passwords and passphrases | | [encoder-decoder-1.0.0.portdapp](encoder-decoder/encoder-decoder-1.0.0.portdapp) |
 | 🌐 | [Subnet Calculator](subnet-calculator/) | IPv4 and IPv6 subnets: hosts, masks and binary, splitting, range checks and summarising | | [subnet-calculator-1.0.0.portdapp](subnet-calculator/subnet-calculator-1.0.0.portdapp) |
+| 🗂️ | [Kanban Board](kanban-board/) | Boards of columns and cards: due dates, labels, checklists, drag and drop, archive and export | `.json` (its own exports) | [kanban-board-1.0.0.portdapp](kanban-board/kanban-board-1.0.0.portdapp) |
 | 💣 | [Minesweeper](minesweeper/) | The classic, with three levels, custom boards, best times and keyboard play | | [minesweeper-1.0.0.portdapp](minesweeper/minesweeper-1.0.0.portdapp) |
 | 🔢 | [Sudoku](sudoku/) | Four difficulties, pencil notes, hints and undo; your game is saved as you play | | [sudoku-1.0.0.portdapp](sudoku/sudoku-1.0.0.portdapp) |
 | 🃏 | [Solitaire](solitaire/) | Klondike, draw 1 or 3, drag or tap, undo, scoring and statistics | | [solitaire-1.0.0.portdapp](solitaire/solitaire-1.0.0.portdapp) |
