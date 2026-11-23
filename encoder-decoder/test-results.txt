@@ -1,0 +1,90 @@
+Encoder-Decoder tests
+  package  encoder-decoder-1.0.0.portdapp
+  portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names Encoder-Decoder 1.0.0 and 7 files, and no file types
+  ok    installed, with a desktop shortcut
+  ok    it opens on Base64 with the cursor in the input
+
+Base64
+  ok    typing gives UTF-8 Base64 straight away
+  ok    Alt+C copies the result
+  ok    Base64URL uses - and _ and no padding
+  ok    Alt+S swaps: the Base64URL becomes the input, the direction is Decode, and the text comes back
+  ok    spaces and line breaks are ignored when decoding
+  ok    a standard Base64 character in Base64URL mode is explained
+  ok    bytes that are not UTF-8 are shown one per byte, with a note and their hex
+  ok    Latin-1 encodes one byte per character
+  ok    …and says plainly when a character is not Latin-1
+  ok    Lines of 76 wraps the result
+  ok    Clear empties the input
+  ok    Ctrl+Z brings it back
+
+URL, Hex and HTML
+  ok    Alt+2 opens URL with the cursor in its input
+  ok    URL encode is encodeURIComponent
+  ok    Whole address keeps : / ? & =
+  ok    decoding turns + into a space (can be turned off)
+  ok    a broken % is explained
+  ok    Hex shows the UTF-8 bytes, spaced, and counts them
+  ok    separator and upper case are options
+  ok    decoding accepts 0x, spaces and commas
+  ok    an odd number of digits is explained
+  ok    HTML encode escapes & < > " '
+  ok    …and can write non-ASCII as numbers
+  ok    decoding handles named and numbered entities, and lists unknown ones
+
+JWT
+  ok    it says plainly that the signature is not checked
+  ok    header and payload are shown as formatted JSON ("Bearer " is fine)
+  ok    an old token is marked expired, with exp and iat in local time and UTC
+  ok    a current token says when it ends; a future nbf says it is not valid yet
+  ok    Copy copies the payload JSON
+  ok    an encrypted token (5 parts) is explained
+  ok    something else is explained
+  ok    an unsigned token is marked "Not signed"
+
+Hash
+  ok    SHA-1, SHA-256, SHA-384, SHA-512 and MD5 of typed text are all right
+  ok    MD5 is labelled "not secure"
+  ok    Compare finds which hash matches, whatever the case or a label in front
+  ok    …and says when nothing matches
+  ok    each hash has its own Copy
+  ok    Upper case is an option
+  ok    a binary file is hashed byte for byte (all five right)
+  ok    a text file is hashed as its UTF-8 bytes, and that is said
+  ok    Back to text hashes the typed text again
+
+Generate
+  ok    Alt+7 opens Generate with Generate focused
+  ok    5 GUIDs, each a random version 4 one
+  ok    upper case and braces are options
+  ok    1,000 at once, all different
+  ok    Alt+G makes new ones
+  ok    passwords: the length asked for, at least one of each kind, no look-alikes
+  ok    strength is estimated in bits
+  ok    with no kinds of character chosen it says so
+  ok    a short digits-only password is marked weak
+  ok    a passphrase of 6 capitalised words from the list, one with a digit
+  ok    the list has hundreds of different words
+  ok    Copy copies it
+
+Keyboard, touch, theme, and what is kept
+  ok    arrow keys move along the tabs
+  ok    touch works on tabs and buttons
+  ok    the theme button goes to light, then dark
+  ok    settings.json keeps the tab, each tool's options and the theme
+  ok    …and nothing that was typed or made: no text, token or password anywhere in the data folder
+  ok    after a PortD reload: the same tab and options, dark, and empty boxes
+
+No errors
+  ok    no console errors in PortD or in Encoder-Decoder
+
+Outside PortD: the page opened straight from its folder
+  ok    it runs, follows the system's dark theme, and hashes
+  ok    the open tab is kept in the browser's storage; the text is not
+  ok    no console errors outside PortD
+
+66 checks: 66 passed, 0 failed
