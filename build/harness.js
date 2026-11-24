@@ -15,7 +15,10 @@ const BROWSER = [process.env.BROWSER,
   'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
   '/usr/bin/microsoft-edge', '/usr/bin/microsoft-edge-stable', '/usr/bin/google-chrome', '/usr/bin/chromium'].find(p => p && fs.existsSync(p));
-const PORTD = path.resolve(process.env.PORTD || path.join(__dirname, 'portd-1.0.0.html'));
+/* the PortD build: PORTD as a version ("1.0.0") or a path, else the latest build in this folder (see versions.js) */
+const V = require('./versions');
+const PORTD = V.file(process.env.PORTD || V.LATEST);
+if (!fs.existsSync(PORTD)) throw new Error('No PortD build at ' + PORTD + '. Builds here: ' + V.BUILDS.join(', '));
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'hub-test-'));
 let dirs = 0;
 const newDir = () => { const d = path.join(tmp, 'd' + ++dirs); fs.mkdirSync(d); return d; };
