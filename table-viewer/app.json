@@ -2,6 +2,7 @@
   "id": "table-viewer",
   "name": "Table Viewer",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "View CSV and TSV files as a table: sort, filter, copy as TSV and save.",
   "icon": "icon.svg",
   "entry": "index.html",

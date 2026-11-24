@@ -1,6 +1,82 @@
+=== PortD 1.0.0 (earliest) ===
 Solitaire tests
   package  solitaire-1.0.0.portdapp
   portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing the ported package
+  ok    PortD 1.0 accepts the format 3 package: Solitaire 1.0.0, 4 files
+  ok    installed, with a desktop shortcut
+
+A new deal
+  ok    it deals Klondike: columns of 1 to 7 with the top card face up, 24 in the stock
+  ok    all 52 cards are on the table, and titled Solitaire
+  ok    the felt and its colours follow the system (light here)
+  ok    clicking the stock turns one card onto the waste
+  ok    the clock starts with the first move
+
+Moving cards: click, drag, undo, scoring
+  ok    clicking an ace sends it to a foundation, +10 points
+  ok    while dragging, the card it would land on is outlined
+  ok    dragging the red queen onto the black king moves it
+  ok    a card with nowhere to go stays put
+  ok    a king with cards on it moves to an empty column, and the card under it turns up, +5
+  ok    Ctrl+Z undoes it
+  ok    so does the Undo button
+
+The stock, Draw 3, recycling
+  ok    Space turns the stock, one card at a time in Draw 1
+  ok    clicking the empty stock turns the waste back over, −100 in Draw 1
+  ok    Draw 3 is saved, and applies from the next game
+  ok    New game during a game asks for a second click
+  ok    …and then deals a Draw 3 game
+  ok    in Draw 3, three cards are turned at a time
+
+Playing from the keyboard (added in the port)
+  ok    arrow keys move a cursor between the columns
+  ok    …and say what is under it to a screen reader
+  ok    Up goes to the top row: the stock above column 1
+  ok    Enter on the waste plays its card like a click: the ace goes up
+  ok    Down goes back to the columns
+  ok    M picks up the card under the cursor
+  ok    M on another pile puts it down there
+  ok    a card that cannot go there stays, and it says so
+  ok    Enter on the two of diamonds sends it nowhere when nothing fits, and says so
+
+Auto-finish and winning
+  ok    when every card is face up and the stock is empty, Auto-finish appears
+  ok    Auto-finish moves every card to the foundations and the game is won
+  ok    the score gets the time bonus: 4 cards × 10, plus 700000 ÷ seconds
+  ok    "You win!" with time and score
+  ok    PortD shows a notice
+  ok    the win, streak and Draw 1 records are saved in stats.json
+
+Saved and resumed
+  ok    the game in progress is saved in game.json
+  ok    after closing and reloading PortD, the same game is resumed
+
+Statistics, theme
+  ok    F1 shows the statistics: played, won with rate, streaks, best per draw mode
+  ok    Reset stats asks for a second click
+  ok    …and then resets
+  ok    Esc closes the box
+  ok    the dark theme uses a deeper felt, and is saved
+
+No errors
+  ok    no console errors in PortD or in Solitaire
+
+Outside PortD: the page opened straight from its folder
+  ok    it deals and follows the system's dark theme
+  ok    the game is kept in localStorage and resumed (0.x saved nothing outside PortD)
+  ok    no console errors outside PortD
+
+46 checks: 46 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Solitaire tests
+  package  solitaire-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
   browser  /usr/bin/google-chrome
 
 Installing the ported package

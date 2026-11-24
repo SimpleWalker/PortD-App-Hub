@@ -4,6 +4,8 @@ A cute idle gacha game: tap the moon for stars, wish for café friends, level th
 
 Version 1.0.0 · for PortD 1.0 · file: `starlight-cafe-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `starlight-cafe-1.0.0.portdapp` to your computer.

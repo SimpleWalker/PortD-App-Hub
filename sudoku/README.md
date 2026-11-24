@@ -4,6 +4,8 @@ Sudoku with four difficulties, pencil notes, hints and undo. Your game is saved 
 
 Version 1.0.0 · for PortD 1.0 · file: `sudoku-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `sudoku-1.0.0.portdapp` to your computer.

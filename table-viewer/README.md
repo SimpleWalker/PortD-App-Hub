@@ -4,6 +4,8 @@ View CSV and TSV files as a table. You can sort, filter, copy rows and save a co
 
 Version 1.0.0 · for PortD 1.0 · file: `table-viewer-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `table-viewer-1.0.0.portdapp` to your computer.

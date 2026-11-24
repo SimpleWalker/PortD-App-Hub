@@ -1,6 +1,107 @@
+=== PortD 1.0.0 (earliest) ===
 Kanban Board tests
   package  kanban-board-1.0.0.portdapp
   portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names Kanban Board 1.0.0, .json and 6 files
+  ok    installed, with a desktop shortcut
+
+A first board
+  ok    it starts with "My board": To do, Doing, Done and four example cards
+  ok    each board has its own file, and boards.json lists them
+  ok    the first card has the keyboard
+  ok    cards show checklist progress and the due date; screen readers get a summary
+
+Drag and drop with the mouse
+  ok    while dragging, a copy follows the pointer and a line shows where it will land
+  ok    dropping on Doing moves it there
+  ok    …and the board is saved
+  ok    dragging within a column reorders it (dropped above the first card)
+  ok    Esc during a drag cancels it: nothing moves
+
+Drag and drop by touch
+  ok    a finger drag moves a card from Done to the end of To do
+  ok    a tap opens the card
+
+Moving with the keyboard
+  ok    ↓ goes to the next card
+  ok    Ctrl+↑ moves the card up, keeps the keyboard on it, and says where it is
+  ok    Ctrl+→ moves it to the next column
+  ok    ← goes to the card in the column to the left
+  ok    M opens the card menu: Open, Move to each other column, top, bottom, Archive
+  ok    arrows and Enter pick "Move to Done"; the keyboard stays on the card
+  ok    Shift+F10 opens the menu too, and Esc closes it
+  ok    Delete archives the card, with a notice
+
+The card: editing as you type
+  ok    Enter opens it, with the title selected for typing
+  ok    the title is saved without pressing anything
+  ok    arrow keys pick a colour label (Orange)
+  ok    a due date in the past says Overdue
+  ok    Enter adds checklist items and leaves the cursor for the next
+  ok    ticking counts as done; × removes an item
+  ok    Done closes it and gives the keyboard back to the card
+  ok    the card shows the label, an overdue date and 1/2
+  ok    all of it is in the board file
+  ok    Move to in the card moves it straight away
+
+Search and filters
+  ok    Ctrl+F searches titles, notes and checklists
+  ok    the Overdue filter shows overdue cards only
+  ok    No due date shows the others
+  ok    label and date filters combine (none match)
+  ok    Show all clears every filter
+
+Columns
+  ok    + Column asks for a name and adds it at the end
+  ok    Move left puts it before Done
+  ok    double-clicking a column name renames it
+  ok    + Add card adds a card to that column
+  ok    deleting a column asks first, and says its cards will be archived
+  ok    …and does it: the card is archived, not lost
+
+The archive
+  ok    Alt+A lists archived cards with where they came from
+  ok    Restore puts a card back in the column it came from
+  ok    Delete forever asks for a second click
+  ok    a second click deletes it for good
+
+Boards: new, switch, export, import, open from Files, delete
+  ok    New board makes an empty board with To do, Doing, Done and opens it
+  ok    the board list switches back, with everything as it was
+  ok    Export board offers "My board.json" in PortD's Save dialog
+  ok    the file holds the whole board, marked as a Kanban board
+  ok    a JSON file that is not a board is refused, plainly
+  ok    opening the board file from Files while Kanban Board is open asks in the same window
+  ok    Add board adds it under a free name and opens it
+  ok    Rename board renames it in the list and the title
+  ok    Delete board asks first, naming the board and how many cards
+  ok    Esc keeps it
+  ok    OK deletes the board and its file, and opens another
+
+Coming back later, theme, damaged files
+  ok    the theme button goes to light, then dark
+  ok    after a PortD reload the last board is open again, dark
+  ok    …and My board is just as it was left
+  ok    a damaged board file is kept under another name, never overwritten, and the window says so
+
+No errors
+  ok    no console errors in PortD or in Kanban Board
+
+Outside PortD: the page opened straight from its folder
+  ok    it runs with the example board and follows the system's dark theme
+  ok    boards are kept in the browser's storage
+  ok    no console errors outside PortD
+
+65 checks: 65 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Kanban Board tests
+  package  kanban-board-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
   browser  /usr/bin/google-chrome
 
 Installing

@@ -1,6 +1,126 @@
+=== PortD 1.0.0 (earliest) ===
 Markdown Editor tests
   package  markdown-editor-1.0.0.portdapp
   portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names it, its version, description and both file types
+  ok    …file count, where it goes and the permission note
+  ok    installed: folder, toast, desktop shortcut, notice for .md and .markdown
+  ok    before a default is chosen, .md opens in Notepad
+  ok    Set as default makes it the program for .md and .markdown
+
+Opening by association; the preview
+  ok    double-clicking a .md opens it, titled with the file
+  ok    split view: source and preview side by side
+  ok    headings, task list, table with alignment are drawn
+  ok    raw HTML is shown as text, never as elements
+  ok    a javascript: link is not made a link, and says why
+  ok    the status bar shows the path, Saved, the position and a word count
+
+Safe links in the preview
+  ok    a web link opens in a new browser tab, through PortD
+  ok    …and the editor's own page did not navigate
+  ok    a #heading link scrolls the preview to that heading
+  ok    a link to a file on the drive is not followed, and says why
+  ok    clicking a blocked link does nothing
+
+Toolbar and shortcuts
+  ok    the B button wraps the selection in **
+  ok    …and pressing it again takes them off
+  ok    Ctrl+I makes it italic
+  ok    Ctrl+Z undoes it (the browser's own undo still works)
+  ok    Ctrl+E makes code
+  ok    Ctrl+Shift+H makes the line a heading
+  ok    …pressed again: ## then ###
+  ok    …and then no heading
+  ok    Ctrl+Shift+8 turns the lines into a bulleted list
+  ok    Ctrl+Shift+7 into a numbered list
+  ok    Ctrl+Shift+9 into a checklist
+  ok    Enter at the end of an item starts the next one
+  ok    Tab indents the item
+  ok    Shift+Tab outdents it; Enter on an empty item ends the list
+  ok    a numbered list counts on
+  ok    Ctrl+K asks for the link, with the selected text
+  ok    …refuses an address that is not web, email or #heading
+  ok    …and inserts a web link, adding https://
+  ok    the Table button inserts a table, with the first heading selected
+  ok    …which the preview draws as a table
+
+Views
+  ok    Ctrl+Shift+E goes from Split to Preview only
+  ok    …then Source only
+  ok    the Split button goes back, and the choice is saved
+
+Saving
+  ok    "Don't save" throws the changes away, and their draft too
+  ok    an edit marks the title with * and the status says Unsaved changes
+  ok    Ctrl+S writes the file straight back (no dialog), keeping its Windows line endings
+  ok    …and the * goes
+  ok    New starts an empty Untitled document
+  ok    New with unsaved changes asks first, in the window: Cancel, Don't save, Save
+  ok    Esc cancels and keeps the text
+  ok    Ctrl+S on a new document opens PortD's Save dialog, named from its first heading
+  ok    the file is written to Documents
+  ok    after Save as, Ctrl+S saves to the same file without asking
+
+Pictures from the drive
+  ok    Picture… opens PortD's Open dialog for pictures
+  ok    it inserts a picture with a path relative to the document
+  ok    …and the preview shows it
+  ok    …kept in the editor's data folder
+  ok    a picture the editor was not given shows a box with "Show picture…"
+  ok    "Show picture…" asks for it in PortD's Open dialog
+  ok    …and then shows it
+  ok    opened again later, both pictures show without asking
+  ok    a picture from the web is explained, not loaded
+
+Export as HTML
+  ok    Export as HTML asks where, named after the document
+  ok    the page is complete, titled from the first heading
+  ok    …with the pictures inside it
+  ok    …raw HTML escaped, the javascript: link dropped, the web link kept and opening in a new tab
+  ok    …and the web picture left out with a note
+  ok    a toast reports the export
+
+Unsaved work survives a closed window
+  ok    unsaved changes are kept as a draft in the data folder
+  ok    closing the window leaves the draft there
+  ok    opening the file again offers to recover the unsaved changes
+  ok    …while the file itself shows as saved
+  ok    Recover brings the text back, marked unsaved
+  ok    …and it saves to the same file, straight away, because this window opened it
+  ok    …after which no draft is left
+  ok    starting the editor from the desktop also offers a left-behind draft
+  ok    Discard removes it
+
+Other files, theme, reload
+  ok    a .markdown file the drive holds as binary is decoded as UTF-8
+  ok    the theme can be set to dark, and is saved
+  ok    after reloading PortD: dark theme and Preview view are kept, and .md still opens here
+  ok    …and the saved edits are there
+
+No errors
+  ok    no console errors in PortD or in Markdown Editor
+
+Outside PortD: the page opened straight from its folder
+  ok    it opens empty and ready to type, following the system's dark theme
+  ok    typing updates the preview
+  ok    unsaved work is kept as a draft in localStorage
+  ok    Save downloads the file, named from the heading
+  ok    Open uses the browser's file picker for .md, .markdown and .txt
+  ok    the chosen file opens
+  ok    Picture… explains that drive pictures need PortD
+  ok    no console errors outside PortD
+
+86 checks: 86 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Markdown Editor tests
+  package  markdown-editor-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
   browser  /usr/bin/google-chrome
 
 Installing

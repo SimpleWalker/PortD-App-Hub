@@ -4,6 +4,8 @@ A searchable library of text you reuse: PowerShell, KQL and Graph queries, email
 
 Version 1.0.0 · for PortD 1.0 · file: `snippets-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `snippets-1.0.0.portdapp` to your computer.

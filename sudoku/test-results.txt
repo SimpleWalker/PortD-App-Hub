@@ -1,3 +1,4 @@
+=== PortD 1.0.0 (earliest) ===
 Sudoku tests
   package  sudoku-1.0.0.portdapp
   portd    build/portd-1.0.0.html
@@ -11,7 +12,7 @@ Starting: a new Easy puzzle
   ok    with no saved game it starts an Easy puzzle with 40 clues (39 at times), titled for it
   ok    the puzzle has exactly one solution, and it is the one kept
   ok    the colours follow the system (light here), as before
-  note  generated: easy 39 clues in 2 ms, medium 32 clues in 3 ms, hard 27 clues in 2 ms, expert 24 clues in 5 ms
+  note  generated: easy 39 clues in 2 ms, medium 32 clues in 1 ms, hard 26 clues in 2 ms, expert 24 clues in 17 ms
   ok    every difficulty gives a puzzle with exactly one solution
   ok    the clue counts are as in 0.x: 40, 32, about 27, about 24 (removing cells in mirrored pairs can go one below)
 
@@ -29,7 +30,77 @@ Notes, hints, keyboard
   ok    in notes mode, numbers are pencilled in
   ok    …and the cell says so to a screen reader
   ok    N turns notes mode off
-  ok    (a note for 8 is pencilled in)
+  ok    (a note for 1 is pencilled in)
+  ok    placing a number clears it from the notes of related cells
+  ok    H (or Hint) fills the selected cell with the right number
+  ok    Ctrl+Z undoes the hint
+  ok    arrow keys move the selection, wrapping at the edge
+  ok    Space pauses: the grid is hidden and the clock stops
+  ok    clicking the cover continues
+
+Saved and resumed
+  ok    the game in progress is saved in game.json
+  ok    after closing and reloading PortD, the same game is resumed
+
+Solving the puzzle from the keyboard
+  ok    filling every cell correctly solves it
+  ok    PortD shows a notice for the solve
+  ok    the win is counted in stats.json with a best time
+
+New game, statistics, theme
+  ok    changing the difficulty after a solve starts a Medium puzzle
+  ok    New game during a game asks for a second click
+  ok    …and the second click starts a new one
+  ok    F1 shows statistics and help
+  ok    Reset stats asks for a second click
+  ok    …and then resets
+  ok    Esc closes it, focus goes back
+  ok    the theme can be set to dark, and is saved
+
+No errors
+  ok    no console errors in PortD or in Sudoku
+
+Outside PortD: the page opened straight from its folder
+  ok    it plays, and follows the system's dark theme
+  ok    the game is kept in localStorage and resumed (0.x saved nothing outside PortD)
+  ok    no console errors outside PortD
+
+42 checks: 42 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Sudoku tests
+  package  sudoku-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
+  browser  /usr/bin/google-chrome
+
+Installing the ported package
+  ok    PortD 1.0 accepts the format 3 package: Sudoku 1.0.0, 4 files
+  ok    installed, with a desktop shortcut
+
+Starting: a new Easy puzzle
+  ok    with no saved game it starts an Easy puzzle with 40 clues (39 at times), titled for it
+  ok    the puzzle has exactly one solution, and it is the one kept
+  ok    the colours follow the system (light here), as before
+  note  generated: easy 40 clues in 1 ms, medium 32 clues in 1 ms, hard 27 clues in 10 ms, expert 24 clues in 10 ms
+  ok    every difficulty gives a puzzle with exactly one solution
+  ok    the clue counts are as in 0.x: 40, 32, about 27, about 24 (removing cells in mirrored pairs can go one below)
+
+Playing with the mouse
+  ok    clicking a cell selects it and lights up its row, column and box
+  ok    a wrong number shows in red and counts a mistake (auto-check is on)
+  ok    Undo takes it back
+  ok    the right number is placed, not red
+  ok    other cells with the same number are highlighted
+  ok    the number pad counts how many of each number are left
+  ok    Erase clears it
+  ok    Auto-check can be switched off: the mistake counter is hidden
+
+Notes, hints, keyboard
+  ok    in notes mode, numbers are pencilled in
+  ok    …and the cell says so to a screen reader
+  ok    N turns notes mode off
+  ok    (a note for 4 is pencilled in)
   ok    placing a number clears it from the notes of related cells
   ok    H (or Hint) fills the selected cell with the right number
   ok    Ctrl+Z undoes the hint

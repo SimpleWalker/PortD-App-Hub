@@ -4,6 +4,8 @@ See what changed between two files or two pieces of text, line by line and word 
 
 Version 1.0.0 · for PortD 1.0 · file: `compare-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `compare-1.0.0.portdapp` to your computer.

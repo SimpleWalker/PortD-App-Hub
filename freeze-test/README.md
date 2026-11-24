@@ -4,6 +4,8 @@ A test tool. It makes itself stop responding, for 15 seconds or for good, so tha
 
 Version 1.0.0 · for PortD 1.0 · file: `freeze-test-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `freeze-test-1.0.0.portdapp` to your computer.

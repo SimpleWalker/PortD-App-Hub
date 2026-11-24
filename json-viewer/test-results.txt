@@ -1,3 +1,4 @@
+=== PortD 1.0.0 (earliest) ===
 JSON Viewer tests
   package  json-viewer-1.0.0.portdapp
   portd    build/portd-1.0.0.html
@@ -87,10 +88,122 @@ Odd files
   ok    20,000 levels of nesting open without a crash
 
 A large file: opened as you go
-  note  a 11.7 MB file with 1,400,002 values opened in 1222 ms, including the Files double-click
+  note  a 11.7 MB file with 1,400,002 values opened in 1100 ms, including the Files double-click
   ok    a 200,000-item array opens as groups of 100
   ok    only a screenful of rows is in the page
-  note  searching every value took about 493 ms
+  note  searching every value took about 684 ms
+  ok    search reaches an item in the last group and reveals it
+  ok    Expand all stops at a sensible limit on a large file and says so
+  ok    Collapse all closes everything
+
+No errors
+  ok    no console errors in PortD or in JSON Viewer
+
+Outside PortD: the page opened straight from its folder
+  ok    it opens with the empty state, following the system's dark theme
+  ok    Open uses the browser's file picker, for .json
+  ok    the chosen file opens as a tree
+  ok    copying works outside PortD (clipboard API)
+  ok    the theme choice is kept in localStorage across a reload
+  ok    no console errors outside PortD
+
+77 checks: 77 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+JSON Viewer tests
+  package  json-viewer-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names the program, version, description and .json
+  ok    …the file count, where it goes and the permission note
+  ok    installed: folder, toast, desktop shortcut
+  ok    the notice offers .json without changing anything
+  ok    before a default is chosen, .json still opens in Notepad
+  ok    Set as default makes it the program for .json
+
+Opening by association; the tree
+  ok    double-clicking a .json opens it in JSON Viewer, titled with the file
+  ok    the top level is open, small children opened too, in file order
+  ok    a number too large for JavaScript is shown exactly as written, and flagged
+  ok    duplicate keys are both shown, marked, and reported
+  ok    values are typed: strings quoted, numbers, true/false and null
+  ok    the status bar shows size, value count and the path of the current item
+  ok    the tree has tree roles and the current item is announced
+
+Keyboard in the tree
+  ok    Down moves through items: $.store.name
+  ok    a key with a space gets a bracket path: $.store["opening hours"]
+  ok    Right opens a closed item
+  ok    Right again goes to its first child
+  ok    Left on a child goes to its parent
+  ok    Left on an open item closes it
+  ok    Ctrl+C copies the value as formatted JSON
+  ok    Ctrl+Shift+C copies the path
+  ok    a string value is copied as its text, without quotes
+  ok    Shift+F10 opens the copy menu, focused on its first item
+  ok    …Copy JSON Pointer from it
+  ok    Home and End go to the first and last items
+
+Mouse
+  ok    clicking the arrow closes an item
+  ok    double-clicking opens it again
+  ok    right-clicking an item opens the menu for it
+  ok    "Expand all below" opens everything under it
+  ok    "Copy path" from the menu
+
+Search
+  ok    Ctrl+F goes to the search box
+  ok    matches in keys and values, case ignored, are counted
+  ok    the list shows each match with its path
+  ok    the first match is revealed and current
+  ok    Enter goes to the next match, opening its parents
+  ok    the matching text is marked
+  ok    Shift+Enter goes back
+  ok    a key matches too
+  ok    numbers and strings both match "9"
+  ok    clicking a match in the list goes to it
+  ok    F3 goes to the next match (the long number)
+  ok    F3 wraps round to the first match
+  ok    no match says so
+  ok    Esc clears the search
+
+Raw text
+  ok    R shows the raw text as in the file, with line numbers
+  ok    "Formatted" shows it re-indented, keeping the large number and both duplicate keys exactly
+  ok    Copy all copies the raw text
+  ok    Esc goes back to the tree
+
+A file that is not valid JSON
+  ok    the error is shown with its line and column and what is wrong
+  ok    …with the lines around it and a marker under the place
+  ok    "Show it in the raw text" selects that character in the raw text
+  ok    …and the tree tools are switched off
+  ok    error for single.json: Line 1, column 2: Expected a key in double quotes,
+  ok    error for comment.json: Line 2, column 3: .*Comments are not allowed|Line 
+  ok    error for two.json: Line 2, column 1: There is more after the end
+  ok    error for open.json: The file ends before the array is closed
+
+Open, Paste, theme, and reloading
+  ok    started from the desktop: the empty state, Open focused
+  ok    Ctrl+O shows PortD's Open dialog listing only .json files
+  ok    the chosen file opens
+  ok    Paste… views pasted text
+  ok    the theme can be set to dark, and is saved
+  ok    after reloading PortD, the dark theme is kept and files still open by association
+  ok    the dark theme colours the window
+
+Odd files
+  ok    a file stored as binary is decoded as UTF-8, byte-order mark dropped
+  ok    20,000 levels of nesting open without a crash
+
+A large file: opened as you go
+  note  a 11.7 MB file with 1,400,002 values opened in 1074 ms, including the Files double-click
+  ok    a 200,000-item array opens as groups of 100
+  ok    only a screenful of rows is in the page
+  note  searching every value took about 466 ms
   ok    search reaches an item in the last group and reveals it
   ok    Expand all stops at a sensible limit on a large file and says so
   ok    Collapse all closes everything

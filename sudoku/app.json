@@ -2,6 +2,7 @@
   "id": "sudoku",
   "name": "Sudoku",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "Sudoku with four difficulties, pencil notes, hints, undo and auto-save",
   "icon": "emoji:🔢",
   "entry": "index.html",

@@ -2,6 +2,7 @@
   "id": "markdown-editor",
   "name": "Markdown Editor",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "Write Markdown with a live preview: toolbar and shortcuts, pictures from the drive, safe links, and Export as HTML.",
   "icon": "icon.svg",
   "entry": "index.html",
