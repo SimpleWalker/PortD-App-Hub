@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-app="freeze-test">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Freeze Test</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <strong>Freeze Test</strong>
+    <span class="spacer"></span>
+    <button id="themeBtn" class="icon" aria-label="Theme"></button>
+  </div>
+  <main>
+    <p>This program makes itself stop responding, so that you can see what PortD does with a frozen program. It changes nothing on your drive.</p>
+    <p class="beat"><span class="dot" aria-hidden="true"></span> <span id="beat">Answering</span></p>
+    <div class="acts">
+      <button id="shortBtn">Freeze for 15 seconds, then recover</button>
+      <button id="goodBtn" class="danger">Freeze for good</button>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <h2>What to expect</h2>
+    <ul>
+      <li>The clock above stops while the program is frozen.</li>
+      <li><b>Other programs stop too.</b> The browser runs all programs together, apart from PortD, so open programs freeze with this one. PortD itself and its built-in apps, such as Notepad, keep working.</li>
+      <li><b>PortD 1.1 and later</b> marks frozen programs after about 6 seconds: a red title bar saying <i>(Not responding)</i>, and a red bar at the top with <b>Close all programs</b>.</li>
+      <li><b>PortD 1.0</b> shows nothing. Close this window with its × button; if other programs stay frozen, close them too.</li>
+      <li>After <i>Freeze for 15 seconds</i>, everything answers again by itself.</li>
+    </ul>
+  </main>
+</div>
+<script src="js/host.js"></script>
+<script src="js/freeze.js"></script>
+</body>
+</html>
