@@ -23,6 +23,7 @@ Each program is a single `.portdapp` file. Download it, install it in PortD, and
 | 🔢 | [Sudoku](sudoku/) | Four difficulties, pencil notes, hints and undo; your game is saved as you play | | [sudoku-1.0.0.portdapp](sudoku/sudoku-1.0.0.portdapp) |
 | 🃏 | [Solitaire](solitaire/) | Klondike, draw 1 or 3, drag or tap, undo, scoring and statistics | | [solitaire-1.0.0.portdapp](solitaire/solitaire-1.0.0.portdapp) |
 | 🌙 | [Starlight Café](starlight-cafe/) | A cute idle game: tap the moon, wish for café friends and fill your album | | [starlight-cafe-1.0.0.portdapp](starlight-cafe/starlight-cafe-1.0.0.portdapp) |
+| 🧊 | [Freeze Test](freeze-test/) | A test tool: makes itself stop responding, for 15 seconds or for good, to see how PortD handles a frozen program | | [freeze-test-1.0.0.portdapp](freeze-test/freeze-test-1.0.0.portdapp) |
 
 Click a program's name for its own guide: how to use it, its keys, where it keeps its data, and its limits.
 

@@ -1,0 +1,12 @@
+{
+  "id": "freeze-test",
+  "name": "Freeze Test",
+  "version": "1.0.0",
+  "description": "A test tool: makes itself stop responding, for 15 seconds or for good, to see how PortD handles a frozen program.",
+  "icon": "emoji:🧊",
+  "entry": "index.html",
+  "width": 520,
+  "height": 420,
+  "singleInstance": false,
+  "fileTypes": []
+}
