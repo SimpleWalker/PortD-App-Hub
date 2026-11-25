@@ -1,5 +1,5 @@
 /* Freeze Test: tests in the real PortD, in headless Chrome or Edge, with real mouse and keyboard input.
-   Run: node freeze-test/test.js   (after node freeze-test/build.js). PORTD=<a PortD 1.1 build> also checks the red bar. */
+   Run: node freeze-test/test.js   (after node freeze-test/build.js). On PortD 1.1 and later it also checks the red bar. */
 'use strict';
 const fs = require('fs'), path = require('path');
 const H = require('../build/harness');

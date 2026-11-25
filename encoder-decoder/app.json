@@ -2,6 +2,7 @@
   "id": "encoder-decoder",
   "name": "Encoder-Decoder",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "Base64, URL, hex and HTML entities both ways, a JWT reader, hashes, GUIDs, passwords and passphrases.",
   "icon": "icon.svg",
   "entry": "index.html",

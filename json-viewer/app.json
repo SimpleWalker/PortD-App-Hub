@@ -2,6 +2,7 @@
   "id": "json-viewer",
   "name": "JSON Viewer",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "Explore JSON files as a tree: search with paths, copy values and paths, raw text, and errors shown where they are.",
   "icon": "icon.svg",
   "entry": "index.html",

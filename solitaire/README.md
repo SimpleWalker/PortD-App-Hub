@@ -4,6 +4,8 @@ Klondike solitaire: draw 1 or draw 3, drag or tap to move, undo, and statistics.
 
 Version 1.0.0 · for PortD 1.0 · file: `solitaire-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `solitaire-1.0.0.portdapp` to your computer.

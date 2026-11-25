@@ -4,6 +4,8 @@ Work out IPv4 and IPv6 subnets: network, broadcast, host range, masks and a bina
 
 Version 1.0.0 · for PortD 1.0 · file: `subnet-calculator-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `subnet-calculator-1.0.0.portdapp` to your computer.

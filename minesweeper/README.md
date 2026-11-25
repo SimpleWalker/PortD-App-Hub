@@ -4,6 +4,8 @@ The classic mine-clearing puzzle. It has three levels plus a custom size, and ke
 
 Version 1.0.0 · for PortD 1.0 · file: `minesweeper-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `minesweeper-1.0.0.portdapp` to your computer.

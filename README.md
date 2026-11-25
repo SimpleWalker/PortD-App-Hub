@@ -51,6 +51,8 @@ To **update**, install the newer file the same way. Your saved data is kept. To 
 
 These programs need **PortD 1.0** or later (package format 3). Get PortD from [SimpleWalker/PortD](https://github.com/SimpleWalker/PortD).
 
+Every program is tested against the latest PortD, and most also against the earliest one they support. Each program's guide says which versions, under its version number.
+
 ## For developers and AI agents
 
 See [AGENTS.md](AGENTS.md) for the package format, the rules a program must follow, and how to build and test.

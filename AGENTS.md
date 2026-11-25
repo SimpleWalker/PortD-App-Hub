@@ -2,7 +2,7 @@
 
 This file is for AI coding agents and developers. The user guide is [README.md](README.md).
 
-PortD 1.0 is a personal desktop in a single HTML file, opened from disk in Edge or Chrome on locked-down computers. This repository holds programs for it. Each program is packed into one `.portdapp` file that the user installs in PortD.
+PortD is a personal desktop in a single HTML file, opened from disk in Edge or Chrome on locked-down computers. This repository holds programs for it. Each program is packed into one `.portdapp` file that the user installs in PortD.
 
 The target is **Microsoft Edge on Windows** (Chrome has the same engine). Programs run offline and must never need the network.
 
@@ -20,16 +20,18 @@ build/
   test-all.js        packs and tests every app, writes each test-results.txt (npm test)
   apps.js            lists the app folders (every top-level folder with an app.json)
   harness.js         test helpers: drives the real PortD in headless Edge/Chrome through Playwright
+  versions.js        lists the PortD builds below and picks the latest
   lib/host.js        the shared PortD-or-standalone helper; every app carries an identical copy
-  portd-1.0.0.html   the PortD 1.0.0 build the tests run against
+  portd-1.0.0.html   the released PortD builds the tests run against, one per version, never edited;
+  portd-1.1.0.html   the newest is "the latest"
 <app-id>/            one folder per program, named exactly as its id
   README.md          the user guide for that program
-  app.json           manifest fields (see below)
+  app.json           manifest fields (see below), plus portdEarliest (see Testing)
   src/               the program's files; src/index.html is the entry page
   src/js/host.js     a copy of build/lib/host.js (the packer refuses a copy that differs)
   build.js           packs this app: node <app-id>/build.js
   test.js            this app's tests: node <app-id>/test.js
-  test-results.txt   output of the last full test run
+  test-results.txt   output of the last full test run, one section per PortD version
   (others)           test helpers an app needs, such as zip-viewer/make-fixtures.py (Python, standard library only)
   <id>-<version>.portdapp   the built package, committed so users can download it
 ```
@@ -118,9 +120,9 @@ Use `src/js/host.js` (`window.Host`) rather than `PortD` directly. It does the s
 
 If you change `host.js`, edit `build/lib/host.js` and copy it into every `src/js/`.
 
-## Known PortD 1.0 limits (may change in a later PortD)
+## Known PortD limits (1.0 and 1.1; may change in a later PortD)
 
-These were found while building the apps here, by reading and testing PortD 1.0.0. A later PortD may lift some of them. When it does, update this list, the affected app READMEs (their "Known limits" sections), and the apps.
+These were found while building the apps here, by reading and testing PortD 1.0.0. PortD 1.1.0 changed none of them, apart from marking frozen programs (below). A later PortD may lift some of them. When it does, update this list, the affected app READMEs (their "Known limits" sections), and the apps.
 
 **Files and folders**
 
@@ -146,6 +148,8 @@ These were found while building the apps here, by reading and testing PortD 1.0.
 - **A program's `name` is also its desktop shortcut's file name**, so it can't contain those characters either: PortD turns `/` into `_` ("Encoder _ Decoder").
 
 **Windows, focus and running code**
+
+- **A program stuck in a long loop stops every program.** Edge and Chrome run all program frames in one process, apart from PortD, so the other programs freeze with it, while PortD and its built-in apps keep working. PortD 1.0 shows nothing; PortD 1.1 marks frozen programs with a red title bar and offers **Close all programs**. Closing only the stuck program does not free the others. Freeze Test shows this.
 
 - **A nested `<iframe>` inside a program runs on the same thread as PortD.** Long-running code, such as a runaway regular expression, freezes all of PortD and can't be stopped from inside. There are no workers, so guard against it beforehand (Regex Tester).
 - **After a PortD dialog (Open, Save) closes, the keyboard stays with PortD.** The browser's own undo doesn't see text a program replaced during that time, so keep your own undo if it matters (Regex Tester).
@@ -180,21 +184,30 @@ Text files (html, htm, css, js, json, md, txt, svg, csv, tsv, xml) are packed as
 ## Testing
 
 ```
-npm test                         # packs and tests every app
+npm test                         # packs and tests every app, against the latest PortD and each app's earliest
 node build/test-all.js sudoku    # just one or a few
-node <app-id>/test.js            # run one app's test directly (build it first)
+node <app-id>/test.js            # run one app's test directly (build it first), against the latest PortD
+PORTD=1.0.0 node <app-id>/test.js   # against another PortD build in build/, by version or path
 ```
+
+**Which PortD versions.** `build/` holds one `portd-<version>.html` for each released PortD; the newest is the latest.
+
+- **Every app is tested against the latest PortD.** This is the minimum. When a new PortD is released, add its build to `build/` (never edit an existing one), run `npm test` for every app, and fix or note what breaks.
+- **An app may also name the earliest PortD it supports**, as `"portdEarliest": "1.0.0"` in `app.json`. `npm test` then runs it against that build as well. A new app should set it when it is meant to work on older PortD too; leave it out to support only the latest. It is not put into the package.
+- **The app README says what was tested**, in a line under the *Version* line: *"Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest)."* `npm test` writes that line itself, and only when every run for that app passed, so it never claims more than was run. Don't edit it by hand.
+- `test-results.txt` holds the output of each run, one section per version.
+- A test that depends on something only newer PortD has should check `PortDHost.version` and say with a `note` what it skipped on older ones (Freeze Test does this for the red bar).
 
 Each `test.js` does the following:
 
-1. Copies `build/portd-1.0.0.html` to a temporary folder and opens it from `file://` in a fresh browser profile.
+1. Copies the PortD build (the latest, or `PORTD`) to a temporary folder and opens it from `file://` in a fresh browser profile.
 2. Installs the built package through **Settings > Programs > Install a program…**, using the real file chooser.
 3. Uses the program with real mouse, keyboard and touch input.
 4. Reads PortD's drive through `window.PortDHost`.
 5. Checks, where they apply: saved data after a full PortD reload, opening by double-click in Files, single-instance behaviour, and the program on its own outside PortD.
 6. Requires no console errors.
 
-**Browser:** set by `BROWSER`, else Edge, else Chrome, else Playwright's Chromium. `PORTD` points at a different PortD build, and `STACKS=1` adds stack traces to page errors.
+**Browser:** set by `BROWSER`, else Edge, else Chrome, else Playwright's Chromium. `PORTD` picks another PortD build (a version in `build/` or a path), and `STACKS=1` adds stack traces to page errors.
 
 Tests print `ok` / `FAIL` per check and end with `N checks: N passed, 0 failed`. Only say something was tested if a test ran it, and say which browser and system it ran on.
 
@@ -225,7 +238,7 @@ Tests print `ok` / `FAIL` per check and end with `N checks: N passed, 0 failed`.
 
 ## Before you commit
 
-- [ ] `npm test` passes for every app you touched, and their `test-results.txt` files are updated.
+- [ ] `npm test` passes for every app you touched, against the latest PortD and the app's `portdEarliest`, and their `test-results.txt` files and README *Tested with* lines are updated by it.
 - [ ] The `.portdapp` was rebuilt from the committed source, with the version in `app.json` matching the file name.
 - [ ] The app README, and the table in the root README, are updated (features, keys, changelog).
 - [ ] `src/js/host.js` is identical to `build/lib/host.js`.
@@ -240,5 +253,5 @@ Tests print `ok` / `FAIL` per check and end with `N checks: N passed, 0 failed`.
 - **Don't change an app's `id`.** It would orphan users' saved data.
 - **Don't change a save format without reading the old one.** Saved data must keep loading after an update.
 - **Don't edit a `.portdapp` by hand.** Change `src/` and rebuild.
-- **Don't edit `build/portd-1.0.0.html`.** It is the released PortD that the tests run against.
+- **Don't edit a `build/portd-<version>.html`.** Each is a released PortD that the tests run against. Add a new file for a new release.
 - **Don't add `alert`, `confirm`, `prompt` or `<form>`.** Don't rely on the clipboard API, downloads or popups.

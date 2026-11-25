@@ -2,6 +2,7 @@
   "id": "zip-viewer",
   "name": "Zip Viewer",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "Look inside .zip files (and .docx, .xlsx, .pptx, .jar): browse, preview text and pictures, and extract.",
   "icon": "icon.svg",
   "entry": "index.html",

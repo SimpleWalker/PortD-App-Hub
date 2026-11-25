@@ -2,6 +2,7 @@
   "id": "compare",
   "name": "Compare",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "See the differences between two files or pasted texts, line by line and word by word, and copy them as a unified diff.",
   "icon": "icon.svg",
   "entry": "index.html",

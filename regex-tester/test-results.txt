@@ -1,6 +1,95 @@
+=== PortD 1.0.0 (earliest) ===
 Regex Tester tests
   package  regex-tester-1.0.0.portdapp
   portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names Regex Tester 1.0.0, .txt and .log, and 6 files
+  ok    installed, with a desktop shortcut, without taking over .txt from Notepad
+  ok    PortD offers .txt and .log in a notice, which can be dismissed
+
+A first look
+  ok    it starts with an example: named groups and dates, 3 matches highlighted
+  ok    the pattern box has the keyboard, and the window is titled Regex Tester
+  ok    each match lists its groups, named and numbered
+  ok    the highlight layer has exactly the text's font, padding, line height and wrapping
+
+Typing a pattern, flags and mistakes
+  ok    matches follow as you type (live): ^error finds nothing at the start of the text
+  ok    m: ^ matches at each line start, so "error" on line 2 matches
+  ok    i: ignoring case finds 3
+  ok    flag buttons say whether they are on
+  ok    without g only the first match is found, and it says how to find them all
+  ok    a mistake in the pattern gives a plain message and no crash
+  ok    fixing it shows the matches again
+  ok    empty matches (\b) are counted and drawn as thin markers
+
+The Matches list
+  ok    clicking a match selects it in the text and marks it
+  ok    Down moves to the next match
+  ok    Enter puts the cursor on it in the text
+
+Replace
+  ok    Alt+2 opens Replace
+  ok    $<name>, $1 and $& work, live
+  ok    $$ gives a dollar sign
+  ok    Copy result copies the whole result
+
+Limits: many matches, a long run, risky patterns
+  ok    5,000 matches are counted, the first 1,000 listed and highlighted
+  ok    a run that takes too long stops at about half a second, says so, and keeps what it found
+  ok    …and Live turns itself off, saying why
+  ok    the replace result is not shown for a stopped run
+  ok    with Live off, nothing runs until Run
+  ok    Ctrl+Enter runs it
+  ok    the Live button turns it back on (and runs)
+  ok    (a+)+$ is not run as you type, with a warning in plain words
+  ok    (\w|\d)* is caught too (choices that can match the same text)
+  ok    Run tries it anyway on purpose (short text: fine)
+
+Saved patterns
+  ok    Ctrl+S asks for a name, suggesting the pattern
+  ok    it is saved with its flags, replacement and text
+  ok    saving under a name that exists asks first
+  ok    Esc closes it, nothing changed, focus back on the button
+  ok    Alt+P lists saved patterns, with Load focused
+  ok    Load brings back the pattern, flags, replacement and text, and runs it
+  ok    Ctrl+Z in the text brings back the text from before Load
+  ok    Delete asks for a second click
+  ok    a second click deletes it
+
+Opening text and log files
+  ok    Ctrl+O opens PortD's Open dialog; the log becomes the test text
+  ok    …and the pattern runs on it
+  ok    Ctrl+Z brings back the text from before
+  ok    Open with lists Regex Tester for .log
+  ok    opening a file starts a second window with that file
+
+Coming back later, theme and keys
+  ok    after a PortD reload the last session is back: pattern, flags, text and tab
+  ok    F1 shows the cheat sheet
+  ok    arrow keys move along the tabs
+  ok    touch works on tabs and flags
+  ok    the theme button goes to light, then dark, and is saved
+  ok    dark colours: dark page, light text
+  ok    a risky pattern from last time is not run on start, so it can't lock PortD again
+
+No errors
+  ok    no console errors in PortD or in Regex Tester
+
+Outside PortD: the page opened straight from its folder
+  ok    it runs the example and follows the system's dark theme
+  ok    the session is kept in the browser's storage
+  ok    no console errors outside PortD
+
+57 checks: 57 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Regex Tester tests
+  package  regex-tester-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
   browser  /usr/bin/google-chrome
 
 Installing

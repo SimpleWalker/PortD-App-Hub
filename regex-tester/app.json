@@ -2,6 +2,7 @@
   "id": "regex-tester",
   "name": "Regex Tester",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "Try regular expressions on your own text: live highlighting, groups, replace, a cheat sheet and saved patterns.",
   "icon": "icon.svg",
   "entry": "index.html",

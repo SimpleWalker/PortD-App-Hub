@@ -2,6 +2,7 @@
   "id": "paint",
   "name": "Paint",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "A simple sketchpad: pencil, shapes, fill, eraser and colours, with undo, zoom, and PNG or JPG files.",
   "icon": "icon.svg",
   "entry": "index.html",

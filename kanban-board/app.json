@@ -2,6 +2,7 @@
   "id": "kanban-board",
   "name": "Kanban Board",
   "version": "1.0.0",
+  "portdEarliest": "1.0.0",
   "description": "Boards of columns and cards: due dates, colour labels, checklists, drag and drop, archive and export.",
   "icon": "icon.svg",
   "entry": "index.html",

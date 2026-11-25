@@ -4,6 +4,8 @@ Try a regular expression (a search pattern) on your own text. You see every matc
 
 Version 1.0.0 · for PortD 1.0 · file: `regex-tester-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `regex-tester-1.0.0.portdapp` to your computer.

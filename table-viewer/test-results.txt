@@ -1,3 +1,4 @@
+=== PortD 1.0.0 (earliest) ===
 Table Viewer tests
   package  table-viewer-1.0.0.portdapp
   portd    build/portd-1.0.0.html
@@ -96,11 +97,135 @@ Files that are awkward
   ok    an empty file says so
 
 A large file: drawn only where it can be seen
-  note  100,000 rows (3.0 MB) opened in 716 ms, including the Files double-click
+  note  100,000 rows (3.0 MB) opened in 739 ms, including the Files double-click
   ok    100,000 rows are read
   ok    only a screenful of rows is in the page
   ok    Ctrl+End goes to the last row, which is drawn
-  note  sorting 100,000 rows by a number column took 182 ms
+  note  sorting 100,000 rows by a number column took 176 ms
+  ok    sorting the large file works
+  ok    filtering the large file works
+
+No errors
+  ok    no console errors in PortD or in Table Viewer
+
+Outside PortD: the page opened straight from its folder
+  ok    it opens with the empty state, following the system's dark theme
+  ok    Open uses the browser's own file picker, for .csv, .tsv and .txt
+  ok    the chosen file opens
+  ok    Copy as TSV works outside PortD too (clipboard API)
+  ok    Save as downloads the file
+  ok    the theme choice is kept in localStorage
+  ok    …and used after a reload
+  ok    dropping a file on the window opens it
+  ok    no console errors outside PortD
+
+84 checks: 84 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Table Viewer tests
+  package  table-viewer-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names the program and version
+  ok    …shows the description and the file types it declares
+  ok    …the file count, where it goes, and the permission note
+  ok    …and the program's own icon
+  ok    installing writes the folder
+  ok    a toast and a desktop shortcut
+  ok    a notice offers .csv and .tsv without changing anything
+  ok    before a default is chosen, a .tsv still opens in Notepad
+  ok    Open with lists Table Viewer for .tsv
+  ok    Set as default on the notice makes it the program for .csv and .tsv
+
+Starting without a file
+  ok    the desktop shortcut starts it, titled Table Viewer
+  ok    it shows the empty state with an Open button, focused
+  ok    the window background is the app's own, not the frame's white
+  ok    stylesheet and scripts were put inline by PortD
+  ok    the empty-state picture was put inline
+
+Opening a file with the Open button
+  ok    PortD's Open dialog appears, titled for the program, listing .csv, .tsv and .txt files
+  ok    the file opens as a table with the header as column names
+  ok    quotes, "" inside quotes, a line break inside quotes and a comma inside quotes are read correctly
+  ok    the window title names the file
+  ok    the status bar shows the delimiter found and the size
+  ok    a warning names the rows with the wrong number of values
+  ok    …which are marked in the row numbers
+  ok    the blank line was skipped, not counted as a bad row
+  ok    Age is recognised as a number column and right-aligned
+  ok    "Show only these rows" shows just the two bad rows
+  ok    …and "Show all rows" brings the rest back
+
+Sorting
+  ok    clicking a number heading sorts by value, empty last
+  ok    …with an up arrow and aria-sort
+  ok    clicking again sorts down, empty still last
+  ok    a third click returns to the file's order
+  ok    text sorts ignoring case and accents
+
+Filtering
+  ok    Ctrl+F puts the cursor in the filter box
+  ok    typing filters across all columns, ignoring case
+  ok    the status bar says how many are shown
+  ok    limiting the filter to one column (Note) finds none
+  ok    Esc in the filter box clears it
+
+Keyboard and selection
+  ok    clicking a row selects it and focuses the table
+  ok    Shift+Down extends the selection
+  ok    Right moves the current cell, and the status bar shows its full value
+  ok    the current cell is announced to screen readers
+  ok    S sorts by the current column
+  ok    Esc clears the selection
+
+Copy as TSV
+  ok    the selected rows are on the clipboard as TSV, with the header and quoting
+  ok    a toast says how many rows were copied
+  note  inside the PortD frame, copying used: copy command
+  ok    Ctrl+C with nothing selected copies every shown row
+
+Save as
+  ok    Ctrl+S opens the app's Save as choices
+  ok    PortD's Save dialog follows, with people.tsv filled in
+  ok    the file is written as TSV: all rows, sorted by Age, with the original line endings
+  ok    a toast says so
+  ok    "Only the rows shown" as CSV writes the filtered rows
+  ok    Esc closes the choices without saving
+
+Theme, saved and reloaded
+  ok    the theme button goes from "follows the system" to light, and saves it
+  ok    …then dark
+  ok    after a reload of PortD the dark theme is still chosen
+  ok    …and the saved file is still on the drive
+  ok    the saved TSV opens again: tab found, same rows, same values
+  ok    the third click returns to following the system
+
+Opening files by association
+  ok    double-clicking a .tsv in Files opens it in Table Viewer
+  ok    …started with the file: PortD.app.args.open
+  ok    …tab found, values read, numbers sorted as numbers
+  ok    "1,234" counts as a number when sorting
+  ok    the type shows as declared in Files
+  ok    a semicolon file is detected as semicolon, with commas kept inside values
+  ok    choosing a delimiter by hand re-reads the file
+  ok    turning off "Header row" makes the first row data, with numbered columns
+  ok    it is not single-instance: a second file opens a second window
+
+Files that are awkward
+  ok    a file the drive holds as binary (a data URL) is decoded as UTF-8, without the byte-order mark
+  ok    a quote that never closes is reported with its line
+  ok    an empty file says so
+
+A large file: drawn only where it can be seen
+  note  100,000 rows (3.0 MB) opened in 721 ms, including the Files double-click
+  ok    100,000 rows are read
+  ok    only a screenful of rows is in the page
+  ok    Ctrl+End goes to the last row, which is drawn
+  note  sorting 100,000 rows by a number column took 156 ms
   ok    sorting the large file works
   ok    filtering the large file works
 

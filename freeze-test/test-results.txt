@@ -1,3 +1,4 @@
+=== PortD 1.0.0 (earliest) ===
 Freeze Test tests
   package  freeze-test-1.0.0.portdapp
   portd    build/portd-1.0.0.html
@@ -45,3 +46,54 @@ Outside PortD: the page opened straight from its folder
   ok    no console errors outside PortD
 
 25 checks: 25 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Freeze Test tests
+  package  freeze-test-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
+  browser  /usr/bin/google-chrome
+
+Installing the package
+  ok    PortD accepts the format 3 package and shows its details
+  ok    installed, with a desktop shortcut
+
+The clock and the buttons
+  ok    the window opens titled Freeze Test
+  ok    the clock runs while the program answers
+  ok    both buttons are there
+  ok    the colours follow the system (light here)
+
+Freeze for 15 seconds, then recover
+  ok    while it is frozen, it does not answer
+  note  while Freeze Test is frozen, To-Do does not answer either (the programs share one process)
+  ok    PortD itself keeps working: the PortD menu opens
+  ok    PortD 1.1.0 shows its red bar and marks the window (Not responding)
+  ok    it recovers by itself after about 15 seconds and says so (15.1 s)
+  ok    the clock runs again
+  ok    To-Do answers again
+  ok    the red bar goes by itself
+
+Freeze for good, after a second click
+  ok    the first click only arms it and warns that other programs freeze too
+  ok    without a second click within 3 seconds it disarms
+  ok    Enter on the button arms it too
+  ok    a second press freezes it, and it stays frozen
+  ok    PortD 1.1.0: Close all programs closes it and To-Do
+  ok    with all program windows closed, a program opened again answers
+
+Theme, and reloading
+  ok    the theme button goes from following the system to light
+  ok    …then dark, saved in settings.json
+  ok    after reloading PortD the theme is kept
+  ok    the theme button has a screen-reader name
+
+No errors
+  ok    no console errors in PortD or in Freeze Test
+
+Outside PortD: the page opened straight from its folder
+  ok    it opens and its clock runs
+  ok    the theme is kept in localStorage
+  ok    no console errors outside PortD
+
+27 checks: 27 passed, 0 failed

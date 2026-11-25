@@ -1,6 +1,105 @@
+=== PortD 1.0.0 (earliest) ===
 Paint tests
   package  paint-1.0.0.portdapp
   portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names Paint 1.0.0, .png .jpg .jpeg .gif and 6 files
+  ok    installed, with a desktop shortcut
+  ok    a new 800 × 600 white picture, fitted to the window, with the drawing area focused
+
+Drawing with the mouse
+  ok    the pencil draws in the main colour (black)
+  ok    the right button draws in the second colour (red, chosen with a right-click on the palette)
+  ok    Line with Shift snaps to straight (blue, along y = 60)
+  ok    Rectangle draws an outline
+  ok    Filled draws a solid rectangle
+  ok    Ellipse (filled) is solid in the middle and leaves the corners
+  ok    Fill fills the inside of the rectangle (green) and not outside
+  ok    the Eraser rubs out to white
+  ok    the Eyedropper picks a colour and goes back to the tool before
+  ok    ] makes the brush bigger (12, 14, 16), [ smaller
+  ok    X swaps the two colours
+
+Pen and touch
+  ok    a pen draws thicker when pressed harder (pressure changes the width)
+  ok    a finger draws too
+
+Drawing from the keyboard
+  ok    arrow keys show a cursor in the middle of the picture
+  ok    Enter, arrows, Enter draws a line from the keyboard
+  ok    Esc cancels a line in progress
+  ok    …and the pencil: pen down, move, pen up
+
+Undo, redo and Clear
+  ok    Ctrl+Z undoes the last step
+  ok    Ctrl+Y redoes it
+  ok    every stroke is a step; at most 50 are kept
+  ok    35 undos take back 35 strokes, in order
+  ok    …and Ctrl+Shift+Z brings them all back
+  ok    Clear asks first, with Cancel focused
+  ok    Esc keeps the picture
+  ok    OK clears it to white
+  ok    …and Undo brings it all back
+
+Zoom and moving around
+  ok    + zooms in (150%, then 200%) and pixels stay sharp from 200%
+  ok    − zooms out
+  ok    1 goes back to 100%
+  ok    Ctrl + mouse wheel zooms
+  ok    the Hand moves around the picture (and draws nothing)
+  ok    0 fits the picture to the window
+
+The tool and palette buttons, from the keyboard
+  ok    the tools are a group of choices: arrow keys pick the next
+  ok    arrow keys move along the palette; Enter picks the main colour
+  ok    Shift+Enter picks the second colour
+
+Saving, and the working copy
+  ok    a working copy of the unsaved picture is kept in the data folder
+  ok    the title and status show it is not saved
+  ok    starting again offers to restore it, with a picture of it
+  ok    Restore brings it back, still marked as not saved
+  ok    Ctrl+S on a new picture asks PNG or JPG first
+  ok    …then PortD's Save dialog, with the name
+  ok    it is saved as a PNG; the working copy is removed
+  ok    after that, Ctrl+S saves straight over the same file, with no dialog
+  ok    Open with lists Paint for .png; the saved file opens with everything in it
+
+Opening pictures, JPG and GIF
+  ok    opening another picture uses the same window (Paint opens in one window)
+  ok    …and opens it at its own size with its colours
+  ok    with unsaved changes, opening another picture asks first
+  ok    a PNG with transparency keeps it, and the Eraser then rubs out to transparent
+  ok    …and the Eraser on a transparent picture rubs out to transparent
+  ok    Save as JPG offers clear.jpg
+  ok    …and saves a JPEG
+  ok    a GIF opens (2 × 2), and will be saved as PNG
+  ok    Open… (PortD's Open dialog) opens a picture
+  ok    …and Ctrl+S saves the change back into that same file, with no dialog
+
+New picture, theme, throwing away a working copy
+  ok    New makes a picture of the size asked, here transparent
+  ok    the theme button goes to light, then dark, and is saved
+  ok    Throw it away asks for a second click
+  ok    a second click throws the working copy away and starts fresh
+
+No errors
+  ok    no console errors in PortD or in Paint
+
+Outside PortD: the page opened straight from its folder
+  ok    it draws and follows the system's dark theme
+  ok    Save downloads a PNG
+  ok    no console errors outside PortD
+
+65 checks: 65 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Paint tests
+  package  paint-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
   browser  /usr/bin/google-chrome
 
 Installing

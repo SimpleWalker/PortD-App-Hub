@@ -1,6 +1,104 @@
+=== PortD 1.0.0 (earliest) ===
 Snippets tests
   package  snippets-1.0.0.portdapp
   portd    build/portd-1.0.0.html
+  browser  /usr/bin/google-chrome
+
+Installing
+  ok    the confirmation names Snippets 1.0.0, its description, .json and 6 files
+  ok    installed, with a desktop shortcut
+  ok    PortD offers .json without changing the default
+
+A new library
+  ok    it starts with 5 examples; the pinned welcome note is first, then A to Z
+  ok    the first one is chosen and the list has the keyboard
+  ok    the library is saved to P:\User\Config\snippets\library.json as readable JSON
+  ok    the list is a listbox and announces the chosen snippet
+  ok    the count says 5 snippets
+
+Copying with the mouse
+  ok    clicking a snippet shows it: title, language, tags and the text in monospace
+  ok    Copy puts the exact text on the clipboard, with a notice
+  ok    …and marks it as just used
+  ok    Sort by last used puts it straight after the pinned one
+  ok    double-clicking a snippet copies it too
+
+Keyboard in the list
+  ok    Home and Down move the choice
+  ok    Enter copies the chosen snippet
+  ok    End goes to the last one, and Ctrl+Enter copies too
+  ok    P pins it: a star, and it moves up among the pinned
+  ok    P again unpins it
+  ok    Delete once only asks: the snippet stays, and the button says "Click again to delete"
+  ok    after 3 seconds the question is withdrawn
+  ok    Delete twice deletes it, and the one above is chosen
+
+Search, tags and the empty state
+  ok    Ctrl+F goes to the search box
+  ok    every word must match, in any order and case: 1 result, words marked in the title, and it is chosen
+  ok    the text is searched too, and the matching line is shown in the list
+  ok    no match says so plainly
+  ok    Esc in the search box clears it
+  ok    the tag list counts each tag, and choosing one filters the list
+  ok    clicking a tag on a snippet filters by it
+
+New, editing as you type, Duplicate
+  ok    Alt+N adds "New snippet" and opens it for editing with the title selected
+  ok    what is typed is saved without pressing anything: title, tags (repeats dropped), language, text
+  ok    Tab in the text types a tab
+  ok    the list follows as you type
+  ok    Esc finishes editing and shows the snippet, with Edit focused
+  ok    F2 edits the chosen snippet
+  ok    an empty title becomes "Untitled"; Done finishes
+  ok    Ctrl+D makes a copy, chosen, marked "(copy)"
+  ok    the Duplicate button does the same
+
+Deleting with the button
+  ok    the first click only asks
+  ok    a second click within 3 seconds deletes
+
+Export, Import and opening a library file
+  ok    Export opens PortD's Save dialog with snippets.json
+  ok    the file holds the whole library, marked as a Snippets library
+  ok    Import… asks how to bring the snippets in
+  ok    Add skips the one already there and adds the new one
+  ok    a JSON file that is not a Snippets library is refused, plainly
+  ok    Open with lists Snippets for .json
+  ok    opening a library file while Snippets is open uses the same window and offers the import
+  ok    Replace asks first: the button changes and a warning shows; nothing is replaced yet
+  ok    Esc closes the import without changing anything
+  ok    opening a library file starts Snippets with the import offered
+  ok    two clicks on Replace replace the library with the file's 2 snippets
+  ok    …and that is saved
+
+Touch, theme, and coming back later
+  ok    tapping a snippet chooses it
+  ok    tapping Copy copies
+  ok    the theme button goes to light, then dark, and is saved
+  ok    dark colours: dark page, light text
+  ok    after a PortD reload: the library, the sort and the theme are back
+  ok    Help lists the keys, focused on Close
+  ok    Tab stays inside the dialog
+  ok    Esc closes it and gives focus back to the ? button
+
+A damaged library file
+  ok    it is kept under another name, never overwritten, and the window says so
+
+No errors
+  ok    no console errors in PortD or in Snippets
+
+Outside PortD: the page opened straight from its folder
+  ok    it runs with the examples and follows the system's dark theme
+  ok    the library is kept in the browser's storage
+  ok    no console errors outside PortD
+
+64 checks: 64 passed, 0 failed
+
+
+=== PortD 1.1.0 (latest) ===
+Snippets tests
+  package  snippets-1.0.0.portdapp
+  portd    build/portd-1.1.0.html
   browser  /usr/bin/google-chrome
 
 Installing

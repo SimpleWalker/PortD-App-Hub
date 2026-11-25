@@ -4,6 +4,8 @@ Draw and touch up pictures. Pencil, line, rectangle, ellipse, fill, eraser and e
 
 Version 1.0.0 · for PortD 1.0 · file: `paint-1.0.0.portdapp`
 
+Tested with PortD 1.0.0 (earliest) and 1.1.0 (latest).
+
 ## Installing it in PortD
 
 1. Download `paint-1.0.0.portdapp` to your computer.
